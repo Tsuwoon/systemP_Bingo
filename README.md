@@ -1,2 +1,3 @@
 # systemP_Bingo
-everybody bingo yea
+
+빙고를 시스템 프로그래밍에 맞추어 만들어봅시다.
