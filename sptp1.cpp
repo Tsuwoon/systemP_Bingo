@@ -2,6 +2,9 @@
 #include <cstdlib>
 #include <time.h>
 #include <iomanip>
+//#include<unistd.h>
+#include<fcntl.h>
+#include<sys/stat.h>
 using namespace std;
 
 class Rnd
@@ -69,7 +72,7 @@ public:
 	}
 
 	int checkBingo() // 이 함수는 nStatus[5][5]를 이용하여 빙고를 부를 수 있는지 검사한다.
-	   // 빙고이면 return 1, 아니면 return 0
+				 // 빙고이면 return 1, 아니면 return 0
 	{
 		int i, j;
 		int Wcount = 0;
@@ -126,7 +129,31 @@ public:
 	{
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				cout << setw(3) << nStatus[i][j];
+				if (nStatus[i][j] == 0) {
+					cout << setw(3) << "★";
+				}
+				else {
+					cout << setw(3) << nStatus[i][j];
+				}
+
+			}
+			cout << "\n";
+		}
+		cout << "\n";
+	}
+
+
+	//컴퓨터의 빙고판 출력
+	void printBingoGrid_com() // 이 함수는 nStatus[5][5]를 출력한다.
+	{
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (nStatus[i][j] == 0) {
+					cout << setw(3) << bingoNum[i][j];
+				}
+				else {
+					cout << setw(3) << "x";
+				}
 			}
 			cout << "\n";
 		}
@@ -136,11 +163,11 @@ public:
 	int callNumber(int number) {
 
 		/* 이 함수는 int number를 입력으로 받아 들인다.
-		   그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
-		   nStatus[5][5]에 기록한다.
-		   int number가 이상이 없으면 return 1
-			  이상이 있으면 return 0
-				 (1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
+		그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
+		nStatus[5][5]에 기록한다.
+		int number가 이상이 없으면 return 1
+		이상이 있으면 return 0
+		(1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
 
 		int i, j;
 
@@ -162,7 +189,7 @@ public:
 	}
 
 	int AI() // 컴퓨터의 [5][5]배열을 통해서 가로, 세로, 대각선의
-	   // 0개수를 파악하여 0이 가장 많은 줄에 0을 넣게하는 알고리즘.
+		   // 0개수를 파악하여 0이 가장 많은 줄에 0을 넣게하는 알고리즘.
 	{
 		int i, j;
 		int zerocount[4] = { 0 }; // 가장 큰 가로 세로 외쪽 오른쪽 배열에 넣기
@@ -242,7 +269,7 @@ public:
 			zerocount[0] = Wbigcount; // 가로 세로 대각선을 비교하기 위해서
 			zerocount[1] = Hbigcount; // 가로 세로를 저장한다.
 
-			/*---------------------------여기서 부터 대각선--------*/
+								/*---------------------------여기서 부터 대각선--------*/
 
 			for (i = 4, j = 0; i >= 0, j < 5; i--, j++) {
 				if (nStatus[j][j] == 0 && LBingoCount == 0) // 왼쪽 대각선
@@ -267,11 +294,11 @@ public:
 			zerocount[2] = Lbigcount; // 왼쪽 대각선의 0개 개수를 저장한다.
 			zerocount[3] = Rbigcount; // 오른쪽 대각선의 0개 개수를 저장한다.
 
-			//---------------------------------------------------------------
-			//zerocount[0]는 가로줄의 0개수
-			//zerocount[1]는 세로줄의 0개수
-			//zerocount[2]는 왼쪽 대각선의 0개수
-			//zerocount[3]는 오른쪽 대각선의 0개수
+								//---------------------------------------------------------------
+								//zerocount[0]는 가로줄의 0개수
+								//zerocount[1]는 세로줄의 0개수
+								//zerocount[2]는 왼쪽 대각선의 0개수
+								//zerocount[3]는 오른쪽 대각선의 0개수
 			temp = zerocount[0];
 			for (i = 0; i < 4; i++) {
 				if (zerocount[i] >= temp) {
@@ -345,9 +372,13 @@ int Select_Thema() {
 			cout << "1에서 4의 숫자를 입력해주세요." << endl;
 
 	}
+	//
 	switch (thema) {
 	case 1:
 		//r_food(); //<읽는 것은 이 안에서 해도 되고 따로 함수로 빼도 될 듯
+		{
+		//fd = open();
+		}
 		break;
 	case 2:
 		//r_animal();
@@ -359,7 +390,7 @@ int Select_Thema() {
 		//r_country();
 		break;
 	}
-	
+
 	return thema;
 }
 //실제 게임 진행 함수
@@ -378,7 +409,7 @@ void vscomputer() {
 
 		fflush(stdin); // 버퍼를 비워준다.
 		user.printBingoGrid();
-		com.printBingoGrid();
+		com.printBingoGrid_com();
 
 		cout << "숫자를 선택하세요 : ";
 		x = scanf("%d", &num); // scanf는 지형 형식자 이외에 모두 입력 거부되어 0또는 1이 들어간다.
@@ -442,8 +473,8 @@ void vscomputer() {
 
 //1번 메뉴(게임시작) 미완성
 void num1() {
-	int thema=Select_Thema();
-	
+	int thema = Select_Thema();
+
 	//Make_Map();//<<현재 Bingo에 내장되어있음
 	vscomputer();
 
@@ -451,10 +482,10 @@ void num1() {
 
 //단어 추가(write) 미완성
 void Add_word() {
-
+	//
 }
 //2번 메뉴(보기추가)
-void num2(){
+void num2() {
 	int thema = Select_Thema();
 	Add_word();
 }
@@ -499,4 +530,3 @@ int main()
 {
 	Game_Start();
 }
-
