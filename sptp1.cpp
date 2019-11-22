@@ -2,9 +2,10 @@
 #include <cstdlib>
 #include <time.h>
 #include <iomanip>
-//#include<unistd.h>
+#include<unistd.h>
 #include<fcntl.h>
 #include<sys/stat.h>
+#define WORD_MAX 1024
 using namespace std;
 
 class Rnd
@@ -361,6 +362,8 @@ public:
 
 
 //테마 선택 함수
+int fd; //file descriptor
+char word[WORD_MAX];
 int Select_Thema() {
 	int thema = 0;
 	while (1) {
@@ -376,10 +379,14 @@ int Select_Thema() {
 	switch (thema) {
 	case 1:
 		//r_food(); //<읽는 것은 이 안에서 해도 되고 따로 함수로 빼도 될 듯
-		{
-		//fd = open();
-		}
-		break;
+	{
+		//
+		fd = open("./food", O_RDONLY);
+		int numread = 0;
+		numread = read(fd, word, WORD_MAX);
+		cout << numread << endl;
+	}
+	break;
 	case 2:
 		//r_animal();
 		break;
