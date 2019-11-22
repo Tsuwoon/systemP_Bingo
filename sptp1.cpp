@@ -2,10 +2,12 @@
 #include <cstdlib>
 #include <time.h>
 #include <iomanip>
-#include<unistd.h>
-#include<fcntl.h>
-#include<sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <errno.h>
 #define WORD_MAX 1024
+#define WORD_SIZE 100
 using namespace std;
 
 class Rnd
@@ -360,10 +362,35 @@ public:
 	}
 };
 
+int readline(int fd, char *buf, int nbytes) {
+	int numread = 0;
+	int returnval;
+
+	while (numread < nbytes - 1) {
+		returnval = read(fd, buf + numread, 1);
+		if ((returnval == -1) && (errno == EINTR))
+			continue;
+		if ((returnval == 0) && (numread == 0))
+			return 0;
+		if (returnval == 0)
+			break;
+		if (returnval == -1)
+			return -1;
+		numread++;
+		if (buf[numread - 1] == '\n') {
+			buf[numread] = '\0';
+			return numread;
+		}
+	}
+	errno = EINVAL;
+	return -1;
+}
 
 //테마 선택 함수
 int fd; //file descriptor
-char word[WORD_MAX];
+char* word[WORD_MAX]; //단어 저장
+int word_count = 0;//단어 몇 개인지 카운트
+char each[WORD_SIZE]; //한 줄 씩 읽을 때 쓸 거(제한 WORD_SIZE바이트)
 int Select_Thema() {
 	int thema = 0;
 	while (1) {
@@ -380,12 +407,14 @@ int Select_Thema() {
 	case 1:
 		//r_food(); //<읽는 것은 이 안에서 해도 되고 따로 함수로 빼도 될 듯
 	{
-		//
 		fd = open("./food", O_RDONLY);
-		int numread = 0;
-		numread = read(fd, word, WORD_MAX);
-		cout << numread << endl;
-		cout << word << endl;
+		int numread=-1;
+		while (numread != 0) {
+			numread = readline(fd, each, WORD_SIZE);
+			cout << word[word_count] << endl;
+			word[word_count++] = each;
+		}
+		cout << "맨 처음꺼 달라졌나?>> "word[0] << endl;
 	}
 	break;
 	case 2:
