@@ -414,7 +414,7 @@ int Select_Thema() {
 			cout << word[word_count] << endl;
 			word[word_count++] = each;
 		}
-		cout << "맨 처음꺼 달라졌나?>> "word[0] << endl;
+		cout << "맨 처음꺼 달라졌나?>> "<<word[0] << endl;
 	}
 	break;
 	case 2:
