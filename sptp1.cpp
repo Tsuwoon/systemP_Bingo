@@ -385,6 +385,7 @@ int Select_Thema() {
 		int numread = 0;
 		numread = read(fd, word, WORD_MAX);
 		cout << numread << endl;
+		cout << word << endl;
 	}
 	break;
 	case 2:
