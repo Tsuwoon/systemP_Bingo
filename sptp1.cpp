@@ -377,7 +377,7 @@ int readline(int fd, char *buf, int nbytes) {
 		if (returnval == -1)
 			return -1;
 		numread++;
-		if (buf[numread ] == '\n') { //! -1 없애보기
+		if (buf[numread -1] == '\n') { //! -1 없애보기
 			buf[numread] = '\0';
 			return numread;
 		}
@@ -416,7 +416,7 @@ int Select_Thema() {
 			word[word_count++] = each;
 			cout << word[word_count - 1] << endl;
 		}
-		//cout << "맨 처음꺼 달라졌나?>> "<<word[0] << endl;
+		//readline에서 그냥 전체 파일이 다 읽히는 데 왜그런지는 이따가 확인합시다.
 	}
 	break;
 	case 2:
