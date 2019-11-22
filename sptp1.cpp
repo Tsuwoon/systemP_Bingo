@@ -377,7 +377,7 @@ int readline(int fd, char *buf, int nbytes) {
 		if (returnval == -1)
 			return -1;
 		numread++;
-		if (buf[numread - 1] == '\n') {
+		if (buf[numread ] == '\n') { //! -1 없애보기
 			buf[numread] = '\0';
 			return numread;
 		}
@@ -411,10 +411,12 @@ int Select_Thema() {
 		int numread=-1;
 		while (numread != 0) {
 			numread = readline(fd, each, WORD_SIZE);
-			cout << word[word_count] << endl;
+			cout << numread << endl;
+			cout << each << endl;
 			word[word_count++] = each;
+			cout << word[word_count - 1] << endl;
 		}
-		cout << "맨 처음꺼 달라졌나?>> "<<word[0] << endl;
+		//cout << "맨 처음꺼 달라졌나?>> "<<word[0] << endl;
 	}
 	break;
 	case 2:
