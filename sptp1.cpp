@@ -364,6 +364,7 @@ public:
 	}
 };
 
+//한 줄 씩 읽기
 int readline(int fd, char *buf, int nbytes) {
 	int numread = 0;
 	int returnval;
@@ -388,6 +389,7 @@ int readline(int fd, char *buf, int nbytes) {
 	return -1;
 }
 
+//단어 쓰기
 int write_word(int fd, const char *buf, size_t nbytes) {
 	size_t write_b=nbytes; //써야할 바이트 수
 	ssize_t written=0; //write호출마다 쓴 바이트 수
@@ -480,6 +482,7 @@ int Select_Thema() {
 
 	return thema;
 }
+
 //실제 게임 진행 함수
 void vscomputer() {
 	srand((unsigned)time(NULL));
@@ -567,7 +570,7 @@ void num1() {
 
 }
 
-//단어 추가(write) 미완성
+//단어 추가(write)
 void Add_word(int thema) {
 	//@@@@@@@@@@@한글 3바이트@@@@@@@@@@
 	//테마 별로 오픈
