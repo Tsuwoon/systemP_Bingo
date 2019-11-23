@@ -390,8 +390,11 @@ int readline(int fd, char *buf, int nbytes) {
 int fd; //file descriptor
 char word[WORD_MAX][WORD_SIZE]; //단어 저장
 int word_count = 0;//단어 몇 개인지 카운트
-char each[WORD_SIZE]; //한 줄 씩 읽을 때 쓸 거(제한 WORD_SIZE바이트)
+//char each[WORD_SIZE]; //한 줄 씩 읽을 때 쓸 거(제한 WORD_SIZE바이트)
 int Select_Thema() {
+	for (int i = 0; i < WORD_MAX; i++) {//word초기화
+		word[i] = nullptr;
+	}
 	int thema = 0;
 	while (1) {
 		cout << "테마를 선택하세요 (1. 음식 2. 동물 3. 숫자 4. 나라이름) : ";
