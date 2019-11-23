@@ -388,15 +388,16 @@ int readline(int fd, char *buf, int nbytes) {
 
 //테마 선택 함수
 int fd; //file descriptor
-char word[WORD_MAX][WORD_SIZE]; //단어 저장
+char word[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 int word_count = 0;//단어 몇 개인지 카운트
-//char each[WORD_SIZE]; //한 줄 씩 읽을 때 쓸 거(제한 WORD_SIZE바이트)
 int Select_Thema() {
-	for (int i = 0; i < WORD_MAX; i++) {//word초기화
+	//word초기화
+	for (int i = 0; i < WORD_MAX; i++) {
 		word[i][0] = '\0';
 	}
+	//테마 번호 입력
 	int thema = 0;
-	while (1) {
+	while (1) { 
 		cout << "테마를 선택하세요 (1. 음식 2. 동물 3. 숫자 4. 나라이름) : ";
 		cin >> thema;
 		if (thema >= 1 && thema <= 4)
@@ -405,37 +406,38 @@ int Select_Thema() {
 			cout << "1에서 4의 숫자를 입력해주세요." << endl;
 
 	}
-	//
+	//테마 별로 오픈
+	read_thema(thema);
 	switch (thema) {
 	case 1:
-		//r_food(); //<읽는 것은 이 안에서 해도 되고 따로 함수로 빼도 될 듯
-	{
-		fd = open("./food", O_RDONLY);
-		int numread;
-		while (1) {
-			numread = readline(fd, word[word_count], WORD_SIZE);
-			if (numread == -1) {
-				perror("읽는데 에러 발생");
-			}
-			if (numread == 0)
-				break;
-			cout << numread << endl;
-			//cout << each << endl;
-			//word[word_count++] = each;
-			cout << word[word_count++]<< endl;
-		}
-		//readline에서 그냥 전체 파일이 다 읽히는 데 왜그런지는 이따가 확인합시다.
-	}
-	break;
+		//r_food();
+		fd = open("./food.txt", O_RDONLY);
+		break;
 	case 2:
 		//r_animal();
+		fd = open("./animal.txt", O_RDONLY);
 		break;
 	case 3:
 		//r_number();
+		fd = open("./number.txt", O_RDONLY);
 		break;
 	case 4:
 		//r_country();
+		fd = open("./country.txt", O_RDONLY);
 		break;
+	}
+
+	int numread;
+	//한 줄 씩 저장된 단어들을 word 배열에 하나씩 넣기
+	while (1) {
+		numread = readline(fd, word[word_count], WORD_SIZE);
+		if (numread == -1) {
+			perror("읽는데 에러 발생");
+		}
+		if (numread == 0)
+			break;
+		cout << numread << endl;
+		cout << word[word_count++] << endl;
 	}
 
 	return thema;
