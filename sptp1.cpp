@@ -408,7 +408,14 @@ int write_word(int fd, const char *buf, size_t nbytes) {
 		numwrite += written;
 		write_b -= written;
 	}
-	return numwrite;
+	//마지막에 \0추가
+	ssize_t plus_null=write(fd, '\0', 1);
+	if (plus_null == -1) {
+		perror("null char 추가 오류.");
+		return -1;
+	}
+	else
+		return numwrite;
 }
 
 //테마 선택 함수
