@@ -585,9 +585,13 @@ void Add_word(int thema) {
 	//단어 입력받기
 	char add[WORD_SIZE] = { '\0' };
 	cout << "해당 테마에 추가하고 싶은 단어를 입력하세요 : ";
+	//버퍼 비우기
+	cin.clear();
+	while (cin.get() != '\n'); 
+	//입력받기
 	cin.getline(add, WORD_SIZE);
 	size_t size = strlen(add);
-	if (size > 1) {
+	if (size > 0) {
 		int iswrite = write_word(fd, add, size);
 		if (iswrite == -1)
 			perror("write 오류 발생");
@@ -595,6 +599,7 @@ void Add_word(int thema) {
 	else
 		cout << "아무것도 입력하지 않아, 단어를 추가하지 않고 종료합니다." << endl;
 }
+
 //2번 메뉴(보기추가)
 void num2() {
 	int thema = Select_Thema();
