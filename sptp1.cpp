@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <string>
 #define WORD_MAX 1024
 #define WORD_SIZE 100
 using namespace std;
@@ -386,6 +387,29 @@ int readline(int fd, char *buf, int nbytes) {
 	return -1;
 }
 
+int write_word(int fd, const char *buf, size_t nbytes) {
+	size_t write=nbytes; //써야할 바이트 수
+	ssize_t written=0; //write호출마다 쓴 바이트 수
+	size_t numwrite=0; //실제로 쓴 바이트 수
+
+	while (write > 0) {
+		written = write(fd, buf, write);
+		if (written == -1) {
+			if (errno != EINTR) {
+				return -1;
+			}
+			else {
+				written = 0;
+				continue;
+			}
+		}
+		buf += written;
+		numwrite += written;
+		write -= written;
+	}
+	return numwrite;
+}
+
 //테마 선택 함수
 int fd; //file descriptor
 char word[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
@@ -438,6 +462,12 @@ int Select_Thema() {
 		cout << numread << endl;
 		cout << word[word_count++] << endl;
 	}
+
+	int retval;
+	while (retval = close(fd), retval == -1 && errno == EINTR);
+	if (retval == -1)
+		perror("close에러 발생");
+	fd = -1;//파일 닫았으니까
 
 	return thema;
 }
@@ -529,14 +559,45 @@ void num1() {
 }
 
 //단어 추가(write) 미완성
-void Add_word() {
-	//@@@@@@@@@@@한글 3바이트
+void Add_word(thema) {
+	//@@@@@@@@@@@한글 3바이트@@@@@@@@@@
+	//테마 별로 오픈
+	switch (thema) {
+	case 1:
+		//r_food();
+		fd = open("./food.txt", O_WRONLY|O_APPEND);
+		break;
+	case 2:
+		//r_animal();
+		fd = open("./animal.txt", O_WRONLY | O_APPEND);
+		break;
+	case 3:
+		//r_number();
+		fd = open("./number.txt", O_WRONLY | O_APPEND);
+		break;
+	case 4:
+		//r_country();
+		fd = open("./country.txt", O_WRONLY | O_APPEND);
+		break;
+	}
 
+	//단어 입력받기
+	char add[WORD_SIZE];
+	//string add_s;
+	cout << "해당 테마에 추가하고 싶은 단어를 입력하세요 : ";
+	cin.getline(add, WORD_SIZE);
+	size_t size = strlen(add);
+	cout << add;
+
+	int iswrite=write_word(fd, add, size);
+	if (iswrite == -1)
+		perror("write 오류 발생");
+	
 }
 //2번 메뉴(보기추가)
 void num2() {
 	int thema = Select_Thema();
-	Add_word();
+	Add_word(thema);
 }
 
 //메뉴 선택
