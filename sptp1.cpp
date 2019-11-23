@@ -581,7 +581,7 @@ void Add_word(int thema) {
 	}
 
 	//단어 입력받기
-	char add[WORD_SIZE];
+	char add[WORD_SIZE] = { '\0' };
 	cout << "해당 테마에 추가하고 싶은 단어를 입력하세요 : ";
 	cin.getline(add, WORD_SIZE);
 	size_t size = sizeof(add)/sizeof(char);
