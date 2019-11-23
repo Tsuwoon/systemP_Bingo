@@ -411,6 +411,9 @@ int Select_Thema() {
 		int numread=-1;
 		while (numread != 0) {
 			numread = readline(fd, each, WORD_SIZE);
+			if (numread == -1) {
+				perror("읽는데 에러 발생");
+			}
 			cout << numread << endl;
 			cout << each << endl;
 			word[word_count++] = each;
