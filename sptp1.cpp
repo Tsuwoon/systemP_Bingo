@@ -409,7 +409,7 @@ int write_word(int fd, const char *buf, size_t nbytes) {
 		write_b -= written;
 	}
 	//마지막에 \n추가
-	char nc[1]={'\n'}
+	char nc[1] = { '\n' };
 	ssize_t plus_null=write(fd, nc, 1);
 	if (plus_null == -1) {
 		perror("newline 추가 오류.");
