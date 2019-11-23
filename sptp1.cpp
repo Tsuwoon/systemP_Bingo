@@ -378,7 +378,7 @@ int readline(int fd, char *buf, int nbytes) {
 			return -1;
 		numread++;
 		if (buf[numread -1] == '\n') { //! -1 없애보기
-			buf[numread] = '\0';
+			buf[numread-1] = '\0';
 			return numread;
 		}
 	}
