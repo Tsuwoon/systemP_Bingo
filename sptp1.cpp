@@ -603,6 +603,7 @@ void Add_word(int thema) {
 		int iswrite = write_word(fd, add, size);
 		if (iswrite == -1)
 			perror("write 오류 발생");
+		cout << "입력한 단어가 추가되었습니다." << endl;
 	}
 	else
 		cout << "아무것도 입력하지 않아, 단어를 추가하지 않고 종료합니다." << endl;
@@ -652,5 +653,7 @@ void Game_Start() {
 
 int main()
 {
-	Game_Start();
+	while (1) {
+		Game_Start();
+	}
 }
