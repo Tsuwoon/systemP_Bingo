@@ -6,6 +6,8 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include<stdio.h>
+#include<string.h>//stdio랑 string은 strlen쓰기위함.
 #define WORD_MAX 1024
 #define WORD_SIZE 100
 using namespace std;
@@ -584,7 +586,7 @@ void Add_word(int thema) {
 	char add[WORD_SIZE] = { '\0' };
 	cout << "해당 테마에 추가하고 싶은 단어를 입력하세요 : ";
 	cin.getline(add, WORD_SIZE);
-	size_t size = sizeof(add) / sizeof(char);
+	size_t size = strlen(add);
 	if (size > 1) {
 		int iswrite = write_word(fd, add, size);
 		if (iswrite == -1)
