@@ -468,8 +468,8 @@ int Select_Thema() {
 		}
 		if (numread == 0)
 			break;
-		cout << numread << endl;
-		cout << word[word_count++] << endl;
+		//cout << numread << endl;
+		//cout << word[word_count++] << endl;
 	}
 
 	int retval;
