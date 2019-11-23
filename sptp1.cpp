@@ -472,6 +472,7 @@ int Select_Thema() {
 			break;
 		//cout << numread << endl;
 		//cout << word[word_count++] << endl;
+		word_count++;
 	}
 
 	int retval;
