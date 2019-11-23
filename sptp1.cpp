@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <string>
 #define WORD_MAX 1024
 #define WORD_SIZE 100
 using namespace std;
@@ -388,7 +389,7 @@ int readline(int fd, char *buf, int nbytes) {
 
 //테마 선택 함수
 int fd; //file descriptor
-char* word[WORD_MAX]; //단어 저장
+char word[WORD_MAX][WORD_SIZE]; //단어 저장
 int word_count = 0;//단어 몇 개인지 카운트
 char each[WORD_SIZE]; //한 줄 씩 읽을 때 쓸 거(제한 WORD_SIZE바이트)
 int Select_Thema() {
@@ -408,16 +409,18 @@ int Select_Thema() {
 		//r_food(); //<읽는 것은 이 안에서 해도 되고 따로 함수로 빼도 될 듯
 	{
 		fd = open("./food", O_RDONLY);
-		int numread=-1;
-		while (numread != 0) {
+		int numread;
+		while (1) {
 			numread = readline(fd, each, WORD_SIZE);
 			if (numread == -1) {
 				perror("읽는데 에러 발생");
 			}
+			if (numread == 0)
+				break;
 			cout << numread << endl;
 			cout << each << endl;
-			word[word_count++] = each;
-			cout << word[word_count - 1] << endl;
+			word[word_count++][WORD_SIZE] = each;
+			cout << word[word_count - 1][WORD_SIZE] << endl;
 		}
 		//readline에서 그냥 전체 파일이 다 읽히는 데 왜그런지는 이따가 확인합시다.
 	}
