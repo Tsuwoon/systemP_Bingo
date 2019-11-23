@@ -410,16 +410,16 @@ int Select_Thema() {
 		fd = open("./food", O_RDONLY);
 		int numread;
 		while (1) {
-			numread = readline(fd, each, WORD_SIZE);
+			numread = readline(fd, word[word_count], WORD_SIZE);
 			if (numread == -1) {
 				perror("읽는데 에러 발생");
 			}
 			if (numread == 0)
 				break;
 			cout << numread << endl;
-			cout << each << endl;
-			word[word_count++] = each;
-			cout << word[word_count - 1][WORD_SIZE] << endl;
+			//cout << each << endl;
+			//word[word_count++] = each;
+			cout << word[word_count++][0]<< endl;
 		}
 		//readline에서 그냥 전체 파일이 다 읽히는 데 왜그런지는 이따가 확인합시다.
 	}
