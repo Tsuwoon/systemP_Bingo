@@ -388,12 +388,12 @@ int readline(int fd, char *buf, int nbytes) {
 }
 
 int write_word(int fd, const char *buf, size_t nbytes) {
-	size_t write=nbytes; //써야할 바이트 수
+	size_t write_b=nbytes; //써야할 바이트 수
 	ssize_t written=0; //write호출마다 쓴 바이트 수
 	size_t numwrite=0; //실제로 쓴 바이트 수
 
-	while (write > 0) {
-		written = write(fd, buf, write);
+	while (write_b > 0) {
+		written = write(fd, buf, write_b);
 		if (written == -1) {
 			if (errno != EINTR) {
 				return -1;
@@ -405,7 +405,7 @@ int write_word(int fd, const char *buf, size_t nbytes) {
 		}
 		buf += written;
 		numwrite += written;
-		write -= written;
+		write_b -= written;
 	}
 	return numwrite;
 }
@@ -559,7 +559,7 @@ void num1() {
 }
 
 //단어 추가(write) 미완성
-void Add_word(thema) {
+void Add_word(int thema) {
 	//@@@@@@@@@@@한글 3바이트@@@@@@@@@@
 	//테마 별로 오픈
 	switch (thema) {
