@@ -418,7 +418,7 @@ int Select_Thema() {
 				break;
 			cout << numread << endl;
 			cout << each << endl;
-			word[word_count++][WORD_SIZE] = each;
+			word[word_count++] = each;
 			cout << word[word_count - 1][WORD_SIZE] << endl;
 		}
 		//readline에서 그냥 전체 파일이 다 읽히는 데 왜그런지는 이따가 확인합시다.
