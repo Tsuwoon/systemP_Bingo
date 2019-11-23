@@ -407,7 +407,6 @@ int Select_Thema() {
 
 	}
 	//테마 별로 오픈
-	read_thema(thema);
 	switch (thema) {
 	case 1:
 		//r_food();
