@@ -474,7 +474,7 @@ int Select_Thema() {
 		word_count++;
 		//cout << word[word_count++] << endl;
 	}
-
+	//close file
 	int retval;
 	while (retval = close(fd), retval == -1 && errno == EINTR);
 	if (retval == -1)
@@ -611,6 +611,14 @@ void Add_word(int thema) {
 	}
 	else
 		cout << "아무것도 입력하지 않아, 단어를 추가하지 않고 종료합니다." << endl;
+
+	//close file
+	int retval;
+	while (retval = close(fd), retval == -1 && errno == EINTR);
+	if (retval == -1)
+		perror("close에러 발생");
+	fd = -1;//파일 닫았으니까
+
 }
 
 //2번 메뉴(보기추가)
