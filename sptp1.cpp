@@ -625,6 +625,7 @@ void Add_word(int thema) {
 void num2() {
 	int thema = Select_Thema();
 	Add_word(thema);
+	//sssss
 }
 
 //메뉴 선택
