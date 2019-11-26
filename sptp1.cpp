@@ -574,6 +574,15 @@ void num1() {
 //단어 추가(write)
 void Add_word(int thema) {
 	//@@@@@@@@@@@한글 3바이트@@@@@@@@@@
+	//사용자에게 현재 저장 단어 출력하기
+	cout << "현재 저장된 단어를 출력합니다." << endl;
+	for (int i = 0; i < WORD_MAX; i++) {
+		if (word[i][0] == '\0') {
+			break;
+		}
+		else
+			cout << i + 1 << ") " << word[i][0] << endl;
+	}
 	//테마 별로 오픈
 	switch (thema) {
 	case 1:
