@@ -581,7 +581,7 @@ void Add_word(int thema) {
 			break;
 		}
 		else
-			cout << i + 1 << ") " << word[i][0] << endl;
+			cout << i + 1 << ") " << word[i] << endl;
 	}
 	//테마 별로 오픈
 	switch (thema) {
