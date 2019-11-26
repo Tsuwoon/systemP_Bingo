@@ -9,7 +9,7 @@
 #include<stdio.h>
 #include<string.h>//stdio랑 string은 strlen쓰기위함.
 #define WORD_MAX 1024
-#define WORD_SIZE 100
+#define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
 
 class Rnd
