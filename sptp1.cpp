@@ -220,6 +220,8 @@ public:
 					if (nStatus[i][j] == 0) {
 						centercount++;
 					}
+
+
 				}
 			}
 			if (centercount < 2) {
