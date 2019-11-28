@@ -16,7 +16,7 @@ using namespace std;
 class Rnd
 {
 private:
-   int start;
+   int start;	
    int end;
 
 public:
@@ -470,6 +470,7 @@ int Select_Thema() {
    }
 
    int numread;
+   word_count = 0;
    //한 줄 씩 저장된 단어들을 word 배열에 하나씩 넣기
    while (1) {
       numread = readline(fd, word[word_count], WORD_SIZE);
@@ -671,16 +672,18 @@ void Game_Start() {
    case 1:
       //cout << 1<< endl; fork
       childpid = fork();
-      if (childpid == -1) {
+      if (childpid < 0 ) { //fork 오류
          perror("Failed to fork");
          exit(0);
       }
-      if (childpid == 0) {
+      if (childpid == 0) { //자식 프로세스
+		 printf("자식 프로세스 시작");
          num1();
       }
-      else {
-         printf("dsfasdfasdfaf");
+      else { //부모 프로세스
+         printf("부모 프로세스 시작");
          wait(&status);
+		 printf("부모 프로세스 종료");
       }
       
 
