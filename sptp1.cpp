@@ -640,7 +640,7 @@ void Add_word(int thema) {
 
 
 pid_t childpid=0;
-int stat;
+int status;
 //2번 메뉴(보기추가)
 void num2() {
    int thema = Select_Thema();
@@ -680,7 +680,7 @@ void Game_Start() {
       }
       else {
          printf("dsfasdfasdfaf");
-         wait(&stat);
+         wait(&status);
       }
       
 
