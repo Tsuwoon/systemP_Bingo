@@ -20,16 +20,16 @@ private:
    int end;
 
 public:
-	Rnd() // 생성될때 1~25까지 범위 초기화
-	{
-		start = 1;
-		end = 25;
-	}
-	int getRNumber() // 난수 생성
-	{
-		int rn = (int)((rand() % (end - start + 1)) + start);
-		return rn;
-	}
+   Rnd() // 생성될때 1~25까지 범위 초기화
+   {
+      start = 1;
+      end = 25;
+   }
+   int getRNumber() // 난수 생성
+   {
+      int rn = (int)((rand() % (end - start + 1)) + start);
+      return rn;
+   }
 };
 
 class Bingo
@@ -139,8 +139,8 @@ public:
                cout << setw(3) << "★";
             }
             else {
-               //cout << setw(3) << nStatus[i][j];
-               cout << setw(3) << word[i][j];
+               cout << setw(3) << nStatus[i][j];
+               //cout << setw(3) << word[i][j];
             }
 
          }
@@ -156,8 +156,8 @@ public:
       for (int i = 0; i < 5; i++) {
          for (int j = 0; j < 5; j++) {
             if (nStatus[i][j] == 0) {
-               //cout << setw(3) << bingoNum[i][j];
-               cout << setw(3) << word[i][j];
+               cout << setw(3) << bingoNum[i][j];
+               //cout << setw(3) << word[i][j];
             }
             else {
                cout << setw(3) << "x";
