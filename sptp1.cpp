@@ -677,13 +677,13 @@ void Game_Start() {
          exit(0);
       }
       if (childpid == 0) { //자식 프로세스
-		 printf("자식 프로세스 시작");
+		 cout<<"자식 프로세스 시작"<<endl;
          num1();
       }
       else { //부모 프로세스
-         printf("부모 프로세스 시작");
+		  cout << "부모 프로세스 시작") << endl;
          wait(&status);
-		 printf("부모 프로세스 종료");
+		 cout << "부모 프로세스 종료") << endl;
       }
       
 
