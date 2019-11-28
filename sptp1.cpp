@@ -681,9 +681,9 @@ void Game_Start() {
          num1();
       }
       else { //부모 프로세스
-		  cout << "부모 프로세스 시작") << endl;
+		  cout << "부모 프로세스 시작" << endl;
          wait(&status);
-		 cout << "부모 프로세스 종료") << endl;
+		 cout << "부모 프로세스 종료"<< endl;
       }
       
 
