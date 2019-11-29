@@ -29,7 +29,7 @@ public:
    Rnd() // 생성될때 1~25까지 범위 초기화
    {
       start = 1;
-      end = 25;
+      end = 16;
    }
    int getRNumber() // 난수 생성
    {
@@ -41,11 +41,11 @@ public:
 class Bingo
 {
 private:
-   int bingoNum[5][5]; // 임의로 생성된 숫자를 저장하는 배열
-   int nStatus[5][5]; // bingoNum[5][5]의 숫자가 불렸는지를 체크하는 배열
-   int num[25]; // 1배열에 25개 난수를 저장한다.
-   int WBingoCount[5]; // 가로줄 빙고 확인
-   int HBingoCount[5]; // 세로줄 빙고 확인
+   int bingoNum[4[4]; // 임의로 생성된 숫자를 저장하는 배열
+   int nStatus[4][4]; // bingoNum[4][4]의 숫자가 불렸는지를 체크하는 배열
+   int num[16]; // 1배열에 25개 난수를 저장한다.
+   int WBingoCount[4]; // 가로줄 빙고 확인
+   int HBingoCount[4]; // 세로줄 빙고 확인
    int RBingoCount; // 오른쪽 대각선 확인
    int LBingoCount; // 왼쪽 대각선 확인
 
@@ -56,7 +56,7 @@ public:
       int i, j;
       int x;
 
-      for (i = 0; i < 25; i++) { // 1차 배열에 중복없는 난수를 저장한다.
+      for (i = 0; i < 16; i++) { // 1차 배열에 중복없는 난수를 저장한다.
 
          x = R.getRNumber();
          num[i] = x;
@@ -67,14 +67,14 @@ public:
             }
          }
       }
-      for (i = 0; i < 5; i++) { // 1차배열을 2차 배열로 만들기
-         for (j = 0; j < 5; j++) {
-            bingoNum[i][j] = num[(i * 5) + j];
+      for (i = 0; i < 4; i++) { // 1차배열을 2차 배열로 만들기
+         for (j = 0; j < 4; j++) {
+            bingoNum[i][j] = num[(i * 4) + j];
             nStatus[i][j] = bingoNum[i][j];
          }
       }
       // -------------------------------초기화
-      for (i = 0; i < 5; i++) { // 배열 초기화
+      for (i = 0; i < 4; i++) { // 배열 초기화
          WBingoCount[i] = 0;
          HBingoCount[i] = 0;
       }
@@ -93,10 +93,10 @@ public:
       int LCoount = 0;
       int bingo = 0;
 
-      for (i = 0; i < 5; i++) { // 가로,세로줄 빙고 체크
+      for (i = 0; i < 4; i++) { // 가로,세로줄 빙고 체크
          Wcount = 0;
          Hcount = 0;
-         for (j = 0; j < 5; j++) {
+         for (j = 0; j < 4; j++) {
             if (nStatus[i][j] == 0) // 가로 체크
             {
                Wcount++;
@@ -105,18 +105,18 @@ public:
             {
                Hcount++;
             }
-            if (Wcount == 5)
+            if (Wcount == 4)
             {
                bingo++;
             }
-            if (Hcount == 5)
+            if (Hcount == 4)
             {
                bingo++;
             }
          }
       }
 
-      for (j = 5, i = 0; j >= 0, i < 5; j--, i++) {
+      for (j = 4, i = 0; j >= 1, i < 4; j--, i++) {
          if (nStatus[j][j] == 0) // 왼쪽 대각선 체크
          {
             LCoount++;
@@ -125,7 +125,7 @@ public:
          {
             RCcount++;
          }
-         if (LCoount == 5 || RCcount == 5)
+         if (LCoount == 4 || RCcount == 4)
          {
             bingo++;
          }
@@ -139,8 +139,8 @@ public:
 
    void printBingoGrid() { // 이 함수는 nStatus[5][5]를 출력한다.
 
-      for (int i = 0; i < 5; i++) {
-         for (int j = 0; j < 5; j++) {
+      for (int i = 0; i < 4; i++) {
+         for (int j = 0; j < 4; j++) {
             if (nStatus[i][j] == 0) {
                cout << setw(18) << "★";
             }
@@ -158,11 +158,11 @@ public:
    //컴퓨터의 빙고판 출력
    void printBingoGrid_com() { // 이 함수는 nStatus[5][5]를 출력한다.
 
-      for (int i = 0; i < 5; i++) {
-         for (int j = 0; j < 5; j++) {
+      for (int i = 0; i < 4; i++) {
+         for (int j = 0; j < 4; j++) {
             if (nStatus[i][j] == 0) {
                cout << setw(10) << bingoNum[i][j];
-               //cout << setw(3) << word[i][j];
+			   //cout << setw(18) << word[(i * 5) + j];
             }
             else {
                cout << setw(10) << "x";
@@ -176,16 +176,16 @@ public:
    int callNumber(int number) {
 
       /* 이 함수는 int number를 입력으로 받아 들인다.
-      그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
-      nStatus[5][5]에 기록한다.
+      그리고, bingoNum[4][4]의 숫자가 호출됐는지 검사하고
+      nStatus[4][4]에 기록한다.
       int number가 이상이 없으면 return 1
       이상이 있으면 return 0
       (1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
 
       int i, j;
 
-      for (i = 0; i < 5; i++) {
-         for (j = 0; j < 5; j++) {
+      for (i = 0; i < 4; i++) {
+         for (j = 0; j < 4; j++) {
             if (nStatus[i][j] == 0 && bingoNum[i][j] == number) { // 중복 체크
                cout << "오류!! 중복됩니다" << endl;
                return 0;
@@ -197,17 +197,17 @@ public:
          }
       }
       // 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
-      cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
+      cout << "오류!! 1~16 중에 숫자를 넣으세요" << endl;
       return 0;
    }
 
-   int AI() // 컴퓨터의 [5][5]배열을 통해서 가로, 세로, 대각선의
+   int AI() // 컴퓨터의 [4][4]배열을 통해서 가로, 세로, 대각선의
         // 0개수를 파악하여 0이 가장 많은 줄에 0을 넣게하는 알고리즘.
    {
       int i, j;
       int zerocount[4] = { 0 }; // 가장 큰 가로 세로 외쪽 오른쪽 배열에 넣기
-      int Wzerocount[5] = { 0 }; // 가로줄 0 개수 저장
-      int Hzerocount[5] = { 0 }; // 가로줄 0 개수 저장
+      int Wzerocount[4] = { 0 }; // 가로줄 0 개수 저장
+      int Hzerocount[4] = { 0 }; // 가로줄 0 개수 저장
       int Wbigline = 0; // 가장 0이 많은 줄 저장
       int Hbigline = 0; // 가장 0이 많은 줄 저장
       int temp = 0;
@@ -222,9 +222,9 @@ public:
       if (nStatus[2][2] == 0) {
 
 
-         for (i = 1; i < 4; i++) // 중앙에 {11,12,13 21,22,23 31,32,33} 배열 0 숫자 카운트
+         for (i = 1; i < 3; i++) // 중앙에 {11,12,13 21,22,23 31,32,33} 배열 0 숫자 카운트
          {
-            for (j = 1; j < 4; j++) {
+            for (j = 1; j < 3; j++) {
                if (nStatus[i][j] == 0) {
                   centercount++;
                }
@@ -233,9 +233,9 @@ public:
             }
          }
          if (centercount < 2) {
-            for (i = 1; i < 4; i++) // 중앙 {111,12,13 21,22,23 31,32,33} 배열에 숫자를 넣는다
+            for (i = 1; i < 3; i++) // 중앙 {111,12,13 21,22,23 31,32,33} 배열에 숫자를 넣는다
             {
-               for (j = 1; j < 4; j++) {
+               for (j = 1; j < 3; j++) {
                   if (nStatus[i][j] != 0) {
                      result = nStatus[i][j];
                      nStatus[i][j] = 0;
@@ -245,12 +245,12 @@ public:
             }
          }
 
-         for (i = 0; i < 5; i++)//가로 세로 0 체크
+         for (i = 0; i < 4; i++)//가로 세로 0 체크
          {
-            for (j = 0; j < 5; j++) {
+            for (j = 0; j < 4; j++) {
                if (nStatus[i][j] == 0 && WBingoCount[i] == 0) {
                   Wzerocount[i]++;
-                  if (Wzerocount[i] == 5)
+                  if (Wzerocount[i] == 4)
                   {
                      WBingoCount[i]++; // 만약 가로줄 중에 빙고가 된다면 다시 못들어오게한다.
                      Wzerocount[i] = 0; // 그리고 가로줄 라인은 갯수를 0으로 만든다.
@@ -259,7 +259,7 @@ public:
             }
             if (nStatus[j][i] == 0 && HBingoCount[i] == 0) {
                Hzerocount[i]++;
-               if (Hzerocount[i] == 5) {
+               if (Hzerocount[i] == 4) {
                   HBingoCount[i]++; // 만약 세로줄 줄에 빙고가 된다면 다시 못들어오게한다.
                   Hzerocount[i] = 0; // 그리고 세로줄라인은 갯수를 0으로 만든다.
                }
@@ -269,7 +269,7 @@ public:
          Wbigcount = Wzerocount[0]; // 처음 가로줄을 가장큰수로 잡는다.
          Hbigcount = Hzerocount[0]; // 처음 세로줄을 가장큰수로 잡는다.
 
-         for (i = 0; i < 5; i++) // 가장 많이 0이된 줄을 찾는다.
+         for (i = 0; i < 4; i++) // 가장 많이 0이된 줄을 찾는다.
          {
             if (Wbigcount < Wzerocount[i]) {
                Wbigcount = Wzerocount[i];
@@ -286,11 +286,11 @@ public:
 
                      /*---------------------------여기서 부터 대각선--------*/
 
-         for (i = 4, j = 0; i >= 0, j < 5; i--, j++) {
+         for (i = 4, j = 0; i >= 1, j < 4; i--, j++) {
             if (nStatus[j][j] == 0 && LBingoCount == 0) // 왼쪽 대각선
             {
                Lbigcount++;
-               if (Lbigcount == 5) {
+               if (Lbigcount == 4) {
                   LBingoCount++;
                   Lbigcount = 0;
                }
@@ -298,7 +298,7 @@ public:
             if (nStatus[i][j] == 0 && RBingoCount == 0) // 오른쪽 대각선
             {
                Rbigcount++;
-               if (Rbigcount == 5)
+               if (Rbigcount == 4)
                {
                   RBingoCount++;
                   Rbigcount = 0;
@@ -324,7 +324,7 @@ public:
 
          if (bignum == 0) // 가로에 0이 없는 곳에 넣는다.
          {
-            for (j = 0; j < 5; j++) {
+            for (j = 0; j < 4; j++) {
                if (nStatus[Wbigline][j] != 0) {
                   result = nStatus[Wbigline][j];
                   nStatus[Wbigline][j] = 0;
@@ -334,7 +334,7 @@ public:
          }
          else if (bignum == 1) // 세로에 0이 없는 곳에 넣는다.
          {
-            for (i = 0; i < 5; i++) {
+            for (i = 0; i < 4; i++) {
                if (nStatus[i][Hbigline] != 0) {
                   result = nStatus[i][Hbigline];
                   nStatus[i][Hbigline] = 0;
@@ -344,7 +344,7 @@ public:
          }
          else if (bignum == 2) // 왼쪽 대각선에 0이 없는 곳에 넣는다.
          {
-            for (i = 0; i < 5; i++) {
+            for (i = 0; i < 4; i++) {
                if (nStatus[i][i] != 0) {
                   result = nStatus[i][i];
                   nStatus[i][i] = 0;
@@ -354,7 +354,7 @@ public:
          }
          else if (bignum == 3) // 오른쪽 대각선에 0이 없는곳에 넣는다.
          {
-            for (i = 0, j = 4; i < 5, j >= 0; i++, j--) {
+            for (i = 0, j = 3; i < 4, j >= 0; i++, j--) {/////
                if (nStatus[i][j] != 0) {
                   result = nStatus[i][j];
                   nStatus[i][j] = 0;
@@ -538,9 +538,9 @@ void vscomputer() {
       {
          a = num;
       }
-      if (x == 0) // x가 문자나 0일 때는 초과된 26을 넣는다.
+      if (x == 0) // x가 문자나 0일 때는 초과된 17을 넣는다.
       {
-         a = 26;
+         a = 17;
       }
       if (user.callNumber(a) == 0) {
          continue;
