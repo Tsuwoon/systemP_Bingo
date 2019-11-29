@@ -7,11 +7,17 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include<stdio.h>
+#include <stdlib.h>
 #include<string.h>//stdio랑 string은 strlen쓰기위함.
 #include<sys/wait.h>
 #define WORD_MAX 1024
 #define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
+
+// 건들지마시오
+char word[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
+// 건들지마시오
+
 
 class Rnd
 {
@@ -136,13 +142,12 @@ public:
       for (int i = 0; i < 5; i++) {
          for (int j = 0; j < 5; j++) {
             if (nStatus[i][j] == 0) {
-               cout << setw(3) << "★";
+               cout << setw(18) << "★";
             }
             else {
-               cout << setw(3) << nStatus[i][j];
-               //cout << setw(3) << word[i][j];
+               // cout << setw(3) << nStatus[i][j];
+               cout << setw(18) << word[(i*5)+j];               
             }
-
          }
          cout << "\n";
       }
@@ -156,11 +161,11 @@ public:
       for (int i = 0; i < 5; i++) {
          for (int j = 0; j < 5; j++) {
             if (nStatus[i][j] == 0) {
-               cout << setw(3) << bingoNum[i][j];
+               cout << setw(10) << bingoNum[i][j];
                //cout << setw(3) << word[i][j];
             }
             else {
-               cout << setw(3) << "x";
+               cout << setw(10) << "x";
             }
          }
          cout << "\n";
@@ -369,6 +374,17 @@ public:
    }
 };
 
+
+
+
+
+//----------------------------------- 여기까지 Class Bingo  ------------------------------------------------------------
+
+
+
+
+
+
 //한 줄 씩 읽기
 int readline(int fd, char* buf, int nbytes) {
    int numread = 0;
@@ -427,9 +443,8 @@ int write_word(int fd, const char* buf, size_t nbytes) {
 }
 
 //테마 선택 함수
+
 int fd; //file descriptor
-char word[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
-char word2[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 int word_count = 0;//단어 몇 개인지 카운트
 
 
@@ -483,6 +498,7 @@ int Select_Thema() {
       word_count++;
       //cout << word[word_count++] << endl;
    }
+
    //close file
    int retval;
    while (retval = close(fd), retval == -1 && errno == EINTR);
@@ -492,6 +508,7 @@ int Select_Thema() {
 
    return thema;
 }
+
 
 //실제 게임 진행 함수
 void vscomputer() {
@@ -507,7 +524,9 @@ void vscomputer() {
 
    while (1) {
 
+
       fflush(stdin); // 버퍼를 비워준다.
+
       user.printBingoGrid();
       com.printBingoGrid_com();
 
@@ -592,6 +611,7 @@ void Add_word(int thema) {
       else
          cout << i + 1 << ") " << word[i] << endl;
    }
+
    //테마 별로 오픈
    switch (thema) {
    case 1:
@@ -682,7 +702,7 @@ void Game_Start() {
       }
       else { //부모 프로세스
 		  cout << "부모 프로세스 시작" << endl;
-         wait(&status);
+         waitpid(childpid, &status, 0);
 		 cout << "부모 프로세스 종료"<< endl;
       }
       
