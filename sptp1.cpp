@@ -7,11 +7,16 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>//stdio랑 string은 strlen쓰기위함.
 #include<sys/wait.h>
 #define WORD_MAX 1024
 #define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
+
+// 건들지마시오
+char word[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
+// 건들지마시오
 
 
 class Rnd
@@ -137,11 +142,11 @@ public:
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nStatus[i][j] == 0) {
-					cout << setw(3) << "★";
+					cout << setw(18) << "★";
 				}
 				else {
-					cout << setw(3) << nStatus[i][j];
-					//cout << setw(3) << word[i][j];
+					//cout << setw(3) << nStatus[i][j];
+					cout << setw(18) << word[(i * 5) + j];
 				}
 
 			}
@@ -157,11 +162,11 @@ public:
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nStatus[i][j] == 0) {
-					cout << setw(3) << bingoNum[i][j];
+					cout << setw(10) << bingoNum[i][j];
 					//cout << setw(3) << word[i][j];
 				}
 				else {
-					cout << setw(3) << "x";
+					cout << setw(10) << "x";
 				}
 			}
 			cout << "\n";
@@ -370,6 +375,11 @@ public:
 	}
 };
 
+
+//----------------------------------- 여기까지 Class Bingo  ------------------------------------------------------------
+
+
+
 //한 줄 씩 읽기
 int readline(int fd, char* buf, int nbytes) {
 	int numread = 0;
@@ -429,8 +439,6 @@ int write_word(int fd, const char* buf, size_t nbytes) {
 
 //테마 선택 함수
 int fd; //file descriptor
-char word[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
-char word2[WORD_MAX][WORD_SIZE]; //단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 int word_count = 0;//단어 몇 개인지 카운트
 
 
