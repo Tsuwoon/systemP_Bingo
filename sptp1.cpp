@@ -13,6 +13,7 @@
 #define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
 
+
 class Rnd
 {
 private:
