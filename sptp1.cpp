@@ -162,13 +162,13 @@ public:
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nStatus[i][j] == 0) { //빙고이면
-					cout << setw(10) << bingoNum[i][j];
+					//cout << setw(10) << bingoNum[i][j];
 					//cout << setw(3) << word[i][j];
-					/////////////////////////컴퓨터 빙고 word 초기화 시키기//////////////////////////////////////
-					//cout << setw(18) << word[(i * 5) + j];
+					//cout << setw(18) << c_word[(i * 5) + j];
 				}
 				else {
-					cout << setw(10) << "x";
+					cout << setw(18) << c_word[(i * 5) + j];
+					//cout << setw(10) << "x";
 				}
 			}
 			cout << "\n";
