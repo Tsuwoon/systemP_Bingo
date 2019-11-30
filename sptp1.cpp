@@ -502,36 +502,38 @@ int Select_Thema() {
 	char words [1024][31];
 	word_count = 0;
 	//한 줄 씩 저장된 단어들을 word 배열에 하나씩 넣기
-	//while (1) {
-	//	numread = readline(fd, words[word_count], WORD_SIZE); //일단 words배열에 모든 단어들 다 넣어두기
-	//	if (numread == -1) {
-	//		perror("읽는데 에러 발생");
-	//	}
-	//	if (numread == 0)
-	//		break;
-	//	word_count++;
-	//}
-
-	//for (int i = 0; i < 5; i++) {
-	//	for (int j = 0; j < 5; j++) {
-	//		int ran1 = rand() % word_count;
-	//		int ran2 = rand() % word_count;
-	//		word[i][j] = words[ran1][31];
-	//		c_word[i][j] = words[ran2][31];
-	//	}
-	//}
-
 	while (1) {
-		numread = readline(fd, word[word_count], WORD_SIZE);
+		numread = readline(fd, words[word_count], WORD_SIZE); //일단 words배열에 모든 단어들 다 넣어두기
 		if (numread == -1) {
 			perror("읽는데 에러 발생");
 		}
 		if (numread == 0)
 			break;
-		//cout << numread << endl;
 		word_count++;
-		//cout << word[word_count++] << endl;
 	}
+
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			int ran1 = rand() % (word_count-1);
+			int ran2 = rand() % (word_count-1);
+			//중복처리
+			cout << words[ran1] << " " << words[ran2] << endl;
+			strcpy(word[(i * 5) + j], words[ran1]);
+			strcpy(c_word[(i * 5) + j], words[ran2]);
+		}
+	}
+
+	//while (1) {
+	//	numread = readline(fd, word[word_count], WORD_SIZE);
+	//	if (numread == -1) {
+	//		perror("읽는데 에러 발생");
+	//	}
+	//	if (numread == 0)
+	//		break;
+	//	//cout << numread << endl;
+	//	word_count++;
+	//	//cout << word[word_count++] << endl;
+	//}
 
 	//close file
 	int retval;
