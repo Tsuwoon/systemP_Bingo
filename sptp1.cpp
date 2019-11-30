@@ -499,11 +499,11 @@ int Select_Thema() {
 	}
 
 	int numread;
-	char* words;
+	char words [1024][31];
 	word_count = 0;
 	//한 줄 씩 저장된 단어들을 word 배열에 하나씩 넣기
 	while (1) {
-		numread = readline(fd, (char*)words[word_count], WORD_SIZE); //일단 words배열에 모든 단어들 다 넣어두기
+		numread = readline(fd, words[word_count], WORD_SIZE); //일단 words배열에 모든 단어들 다 넣어두기
 		if (numread == -1) {
 			perror("읽는데 에러 발생");
 		}
@@ -516,8 +516,8 @@ int Select_Thema() {
 		for (int j = 0; j < 5; j++) {
 			int ran1 = rand() % word_count;
 			int ran2 = rand() % word_count;
-			word[i][j] = words[ran1];
-			c_word[i][j] = words[ran2];
+			word[i][j] = words[ran1][0];
+			c_word[i][j] = words[ran2][0];
 		}
 	}
 
