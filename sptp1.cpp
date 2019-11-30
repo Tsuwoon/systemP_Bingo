@@ -7,18 +7,17 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include<string.h>//stdio랑 string은 strlen쓰기위함.
 #include<sys/wait.h>
 #define WORD_MAX 1024
 #define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
 
-
 // 건들지마시오
 char word[WORD_MAX][WORD_SIZE]; //사용자 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 char c_word[WORD_MAX][WORD_SIZE]; //컴퓨터 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
-// 건들지마시오
+								  // 건들지마시오
 
 
 class Rnd
@@ -148,7 +147,7 @@ public:
 				}
 				else {
 					//cout << setw(3) << nStatus[i][j];
-					cout << setw(18) << word[(i * 5) + j]; 
+					cout << setw(18) << word[(i * 5) + j];
 				}
 			}
 			cout << "\n";
@@ -174,43 +173,37 @@ public:
 		cout << "\n";
 	}
 
-	char callNumber(int num1, int num2) {////////////////
-
-		int i, j;
-
-		//행,열로 받은 좌표를 이용해 nStatus값을 갱신한다
-		nStatus[i][j] == 0;
-		return word[i][j];
-
+	int callNumber(int number) {
 
 		/* 이 함수는 int number를 입력으로 받아 들인다.
-		그리고, word //bingoNum[5][5]의 숫자가 호출됐는지 검사하고
+		그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
 		nStatus[5][5]에 기록한다.
 		int number가 이상이 없으면 return 1
 		이상이 있으면 return 0
 		(1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
 
-		//for (i = 0; i < 5; i++) {
-		//	for (j = 0; j < 5; j++) {
-		//		if (nStatus[i][j] == 0 && bingoNum[i][j] == number) { // 중복 체크
-		//			cout << "오류!! 중복됩니다" << endl;
-		//			return 0;
-		//		}
-		//		if (nStatus[i][j] == number) { // 문제 없음
-		//			nStatus[i][j] = 0;
-		//			return 1;
-		//		}
-		//	}
-		//}
-		//// 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
-		//cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
-		//return 0;
+		int i, j;
+
+		for (i = 0; i < 5; i++) {
+			for (j = 0; j < 5; j++) {
+				if (nStatus[i][j] == 0 && bingoNum[i][j] == number) { // 중복 체크
+					cout << "오류!! 중복됩니다" << endl;
+					return 0;
+				}
+				if (nStatus[i][j] == number) { // 문제 없음
+					nStatus[i][j] = 0;
+					return 1;
+				}
+			}
+		}
+		// 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
+		cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
+		return 0;
 	}
 
-	int* AI() // 컴퓨터의 [5][5]배열을 통해서 가로, 세로, 대각선의
+	int AI() // 컴퓨터의 [5][5]배열을 통해서 가로, 세로, 대각선의
 			 // 0개수를 파악하여 0이 가장 많은 줄에 0을 넣게하는 알고리즘.
 	{
-		int wArray[2];
 		int i, j;
 		int zerocount[4] = { 0 }; // 가장 큰 가로 세로 외쪽 오른쪽 배열에 넣기
 		int Wzerocount[5] = { 0 }; // 가로줄 0 개수 저장
@@ -246,9 +239,7 @@ public:
 						if (nStatus[i][j] != 0) {
 							result = nStatus[i][j];
 							nStatus[i][j] = 0;
-							wArray[0] = i;
-							wArray[1] = j;
-							return wArray;
+							return result;
 						}
 					}
 				}
@@ -337,9 +328,7 @@ public:
 					if (nStatus[Wbigline][j] != 0) {
 						result = nStatus[Wbigline][j];
 						nStatus[Wbigline][j] = 0;
-						wArray[0] = i;
-						wArray[1] = j;
-						return wArray;
+						return result;
 					}
 				}
 			}
@@ -349,9 +338,7 @@ public:
 					if (nStatus[i][Hbigline] != 0) {
 						result = nStatus[i][Hbigline];
 						nStatus[i][Hbigline] = 0;
-						wArray[0] = i;
-						wArray[1] = j;
-						return wArray;
+						return result;
 					}
 				}
 			}
@@ -361,9 +348,7 @@ public:
 					if (nStatus[i][i] != 0) {
 						result = nStatus[i][i];
 						nStatus[i][i] = 0;
-						wArray[0] = i;
-						wArray[1] = j;
-						return wArray;
+						return result;
 					}
 				}
 			}
@@ -373,9 +358,7 @@ public:
 					if (nStatus[i][j] != 0) {
 						result = nStatus[i][j];
 						nStatus[i][j] = 0;
-						wArray[0] = i;
-						wArray[1] = j;
-						return wArray;
+						return result;
 					}
 				}
 			}
@@ -385,16 +368,20 @@ public:
 		{
 			result = nStatus[2][2];
 			nStatus[2][2] = 0; // 첫번째로 nStatus[2][2]에 0이 없으면 0을 넣는다.
-			wArray[0] = i;
-			wArray[1] = j;
-			return wArray;
+			return result;
 		}
 
 	}
 };
 
 
+
+
+
 //----------------------------------- 여기까지 Class Bingo  ------------------------------------------------------------
+
+
+
 
 
 
@@ -456,6 +443,7 @@ int write_word(int fd, const char* buf, size_t nbytes) {
 }
 
 //테마 선택 함수
+
 int fd; //file descriptor
 int word_count = 0;//단어 몇 개인지 카운트
 
@@ -498,7 +486,7 @@ int Select_Thema() {
 	}
 
 	int numread;
-	char words [1024][31];
+	char words[1024][31];
 	word_count = 0;
 	//한 줄 씩 저장된 단어들을 word 배열에 하나씩 넣기
 	while (1) {
@@ -511,41 +499,31 @@ int Select_Thema() {
 		word_count++;
 	}
 
-	int wLoop = 0;
-	int ran1 = 0;
-	int ran2 = 0;
-	int iSwit1[25], iSwit2[25]; //랜덤 체크용 배열
-	int r_arr1[25], r_arr2[25]; //랜덤값 대입 받을 배열
-
+	int r_arr1[25], r_arr2[25]; //중복 제거용 배열
 	for (int i = 0; i < 25; i++) {
-		iSwit1[i] = 0;
-		iSwit2[i] = 0;
-	}
-	
-	while (wLoop < 25) {
-		ran1= rand() % (word_count);
-		if (iSwit1[ran1] == 0) {
-			r_arr1[wLoop] = ran1 + 1;
-			iSwit1[ran1] = 1; //신규 생성
-			wLoop++;
-		}
-	}
+		int ran1 = rand() % (word_count);
+		int ran2 = rand() % (word_count);
 
-	wLoop = 0;
-	while (wLoop < 25) {
-		ran2 = rand() % (word_count);
-		if (iSwit2[ran2] == 0) {
-			r_arr2[wLoop] = ran2 + 1;
-			iSwit2[ran2] = 1; //신규 생성
-			wLoop++;
+		if (!r_arr1[0] && !r_arr2[0]) { //차있다면
+			for (int j = 0; j < i; j++) {
+				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) { //하나라도 중복이면
+					int ran1 = rand() % (word_count);
+					int ran2 = rand() % (word_count);
+					j--;
+					continue;
+				}
+				else
+					break;
+			}
 		}
+		r_arr1[i] = ran1;
+		r_arr2[i] = ran2;
 	}
-
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			
-			cout << words[ran1] << " " << words[ran2] << endl;
+
+			/*cout << words[ran1] << " " << words[ran2] << endl;*/
 			strcpy(word[(i * 5) + j], words[r_arr1[(i * 5) + j]]);
 			strcpy(c_word[(i * 5) + j], words[r_arr2[(i * 5) + j]]);
 		}
@@ -561,6 +539,7 @@ int Select_Thema() {
 	return thema;
 }
 
+
 //실제 게임 진행 함수
 void vscomputer() {
 	srand((unsigned)time(NULL));
@@ -569,43 +548,36 @@ void vscomputer() {
 	Bingo com;
 
 	int x;
-	int num1,num2; //행, 열
-	//int a;
-	//int y;
-	int *arr; //컴퓨터 행,열 받을 배열
-	string userCall;
+	int num;
+	int a;
+	int y;
 
 	while (1) {
 
+
 		fflush(stdin); // 버퍼를 비워준다.
+
 		user.printBingoGrid();
 		com.printBingoGrid_com();
 
-		cout << "뒤집을 단어를 선택하세요 (ex. 1 2 -> 1행 2열) : ";
-		scanf("%d %d", &num1, &num2);
+		cout << "숫자를 선택하세요 : ";
+		x = scanf("%d", &num); // scanf는 지형 형식자 이외에 모두 입력 거부되어 0또는 1이 들어간다.
 
 		cout << "---------------------------------" << endl;
-		//if (x == 1) // x가 1일때에는 정수를 입력했으므로 다시 정수를 입력시킨다.
-		//{
-		//	a = num;
-		//}
-		//if (x == 0) // x가 문자나 0일 때는 초과된 26을 넣는다.
-		//{
-		//	a = 26;
-		//}
-		//if (user.callNumber(a) == 0) {////////////////////////////////////////////////////////////////////////////
-		//	continue;
-		//}
-
-		//if (user.callNumber(num1, num2) == 0) //중복이거나 입력 오류시
-		//	continue;
+		if (x == 1) // x가 1일때에는 정수를 입력했으므로 다시 정수를 입력시킨다.
+		{
+			a = num;
+		}
+		if (x == 0) // x가 문자나 0일 때는 초과된 26을 넣는다.
+		{
+			a = 26;
+		}
+		if (user.callNumber(a) == 0) {
+			continue;
+		}
 
 		//---------------------------------컴퓨터--------------------------------
-		userCall = user.callNumber(num1, num2);
-
-		//컴퓨터에서 userCall 단어 행,열 계산해서 해당 위치 찾아야함 
-
-		com.callNumber(num1,num2);//사용자가 입력한 행,열 값을 넘겨줌 
+		com.callNumber(a);
 		if (user.checkBingo() == 1) // 사용자가 먼저 빙고를 부르면 승리!!를 체크
 		{
 			cout << "-------------------------------" << endl;
@@ -623,9 +595,9 @@ void vscomputer() {
 			break;
 		}
 
-		arr = com.AI(); // 컴퓨터 실행; /행,열 값으로 바꿔야 함
-		cout << "컴퓨터가 부른 수는? : " << arr[0] << arr[1] << endl;
-		user.callNumber(arr[0],arr[1]);//컴퓨터가 넘겨준 행,열 값 넣기
+		y = com.AI(); // 컴퓨터 실행;
+		cout << "컴퓨터가 부른 수는? : " << y << endl;
+		user.callNumber(y);
 
 		if (com.checkBingo() == 1) // 컴퓨터가 먼저 빙고를 부르면 승리!!를 체크
 		{
@@ -669,6 +641,7 @@ void Add_word(int thema) {
 		else
 			cout << i + 1 << ") " << word[i] << endl;
 	}
+
 	//테마 별로 오픈
 	switch (thema) {
 	case 1:
@@ -759,7 +732,7 @@ void Game_Start() {
 		}
 		else { //부모 프로세스
 			cout << "부모 프로세스 시작" << endl;
-			wait(&status);
+			waitpid(childpid, &status, 0);
 			cout << "부모 프로세스 종료" << endl;
 		}
 
