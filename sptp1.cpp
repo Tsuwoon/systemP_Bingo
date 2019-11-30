@@ -517,9 +517,11 @@ int Select_Thema() {
 	int iSwit1[25], iSwit2[25]; //랜덤 체크용 배열
 	int r_arr1[25], r_arr2[25]; //랜덤값 대입 받을 배열
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 25; i++) {
 		iSwit1[i] = 0;
-
+		iSwit2[i] = 0;
+	}
+	
 	while (wLoop < 25) {
 		ran1= rand() % (word_count);
 		if (iSwit1[ran1] == 0) {
@@ -532,7 +534,7 @@ int Select_Thema() {
 	wLoop = 0;
 	while (wLoop < 25) {
 		ran2 = rand() % (word_count);
-		if (iSwit2[ran1] == 0) {
+		if (iSwit2[ran2] == 0) {
 			r_arr2[wLoop] = ran2 + 1;
 			iSwit2[ran2] = 1; //신규 생성
 			wLoop++;
