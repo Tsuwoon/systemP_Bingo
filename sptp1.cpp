@@ -14,6 +14,7 @@
 #define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
 
+
 // 건들지마시오
 char word[WORD_MAX][WORD_SIZE]; //사용자 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 char c_word[WORD_MAX][WORD_SIZE]; //컴퓨터 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
@@ -162,13 +163,10 @@ public:
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nStatus[i][j] == 0) { //빙고이면
-					//cout << setw(10) << bingoNum[i][j];
-					//cout << setw(3) << word[i][j];
-					//cout << setw(18) << c_word[(i * 5) + j];
+					cout << setw(18) << c_word[(i * 5) + j];
 				}
 				else {
-					cout << setw(18) << c_word[(i * 5) + j];
-					//cout << setw(10) << "x";
+					cout << setw(10) << "x";
 				}
 			}
 			cout << "\n";
@@ -463,6 +461,7 @@ int word_count = 0;//단어 몇 개인지 카운트
 
 
 int Select_Thema() {
+	srand((unsigned)time(NULL));
 	//word초기화
 	for (int i = 0; i < WORD_MAX; i++) {
 		word[i][0] = '\0';
@@ -512,11 +511,29 @@ int Select_Thema() {
 		word_count++;
 	}
 
+	int r_arr1[25],r_arr2[25]; //중복 제거용 배열
+	for (int i = 0; i < 25; i++) {
+		int ran1 = rand() % (word_count);
+		int ran2 = rand() % (word_count);
+
+		if (r_arr1[0] != NULL && r_arr2[0] != NULL) { //차있다면
+			for (int j = 0; j < i; j++) {
+				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) //하나라도 중복이면
+					continue;
+				else
+					break;
+			}
+		}
+		r_arr1[i] = ran1;
+		r_arr2[i] = ran2;
+	}
+
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			int ran1 = rand() % (word_count-1);
 			int ran2 = rand() % (word_count-1);
 			//중복처리
+			
 			cout << words[ran1] << " " << words[ran2] << endl;
 			strcpy(word[(i * 5) + j], words[ran1]);
 			strcpy(c_word[(i * 5) + j], words[ran2]);
