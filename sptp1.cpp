@@ -534,12 +534,10 @@ int Select_Thema() {
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			int ran1 = rand() % (word_count-1);
-			int ran2 = rand() % (word_count-1);
 			
-			cout << words[ran1] << " " << words[ran2] << endl;
-			strcpy(word[(i * 5) + j], words[ran1]);
-			strcpy(c_word[(i * 5) + j], words[ran2]);
+			/*cout << words[ran1] << " " << words[ran2] << endl;*/
+			strcpy(word[(i * 5) + j], words[r_arr1[(i * 5) + j]]);
+			strcpy(c_word[(i * 5) + j], words[r_arr2[(i * 5) + j]]);
 		}
 	}
 
