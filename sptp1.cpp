@@ -516,8 +516,8 @@ int Select_Thema() {
 		for (int j = 0; j < 5; j++) {
 			int ran1 = rand() % word_count;
 			int ran2 = rand() % word_count;
-			word[i][j] = words[ran1][0];
-			c_word[i][j] = words[ran2][0];
+			word[i][j] = words[ran1][31];
+			c_word[i][j] = words[ran2][31];
 		}
 	}
 
