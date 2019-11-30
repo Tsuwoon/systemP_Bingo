@@ -542,7 +542,7 @@ void vscomputer() {
 		com.printBingoGrid_com();
 
 		cout << "뒤집을 단어를 선택하세요 (ex. 1 2 -> 1행 2열) : ";
-		scanf("%d %d", &num, &num2);
+		scanf("%d %d", &num1, &num2);
 
 		cout << "---------------------------------" << endl;
 		//if (x == 1) // x가 1일때에는 정수를 입력했으므로 다시 정수를 입력시킨다.
