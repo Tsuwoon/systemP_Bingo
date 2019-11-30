@@ -511,32 +511,39 @@ int Select_Thema() {
 		word_count++;
 	}
 
-	int r_arr1[25],r_arr2[25]; //중복 제거용 배열
-	for (int i = 0; i < 25; i++) {
-		cout << i << " 들어감?" << endl;
-		int ran1 = rand() % (word_count);
-		int ran2 = rand() % (word_count);
+	int wLoop = 0;
+	int ran1 = 0;
+	int ran2 = 0;
+	int iSwit1[25], iSwit2[25]; //랜덤 체크용 배열
+	int r_arr1[25], r_arr2[25]; //랜덤값 대입 받을 배열
 
-		if (!r_arr1[0] && !r_arr2[0]) { //차있다면
-			for (int j = 0; j < i; j++) {
-				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) { //하나라도 중복이면
-					int ran1 = rand() % (word_count);
-					int ran2 = rand() % (word_count);
-					j--;
-					continue;
-				}
-				else
-					break;
-			}
+	for (int i = 0; i < 25; i++)
+		iSwit1[i] = 0;
+
+	while (wLoop < 25) {
+		ran1= rand() % (word_count);
+		if (iSwit1[ran1] == 0) {
+			r_arr1[wLoop] = ran1 + 1;
+			iSwit1[ran1] = 1; //신규 생성
+			wLoop++;
 		}
-		r_arr1[i] = ran1;
-		r_arr2[i] = ran2;
 	}
+
+	wLoop = 0;
+	while (wLoop < 25) {
+		ran2 = rand() % (word_count);
+		if (iSwit2[ran1] == 0) {
+			r_arr2[wLoop] = ran2 + 1;
+			iSwit2[ran2] = 1; //신규 생성
+			wLoop++;
+		}
+	}
+
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			
-			/*cout << words[ran1] << " " << words[ran2] << endl;*/
+			cout << words[ran1] << " " << words[ran2] << endl;
 			strcpy(word[(i * 5) + j], words[r_arr1[(i * 5) + j]]);
 			strcpy(c_word[(i * 5) + j], words[r_arr2[(i * 5) + j]]);
 		}
