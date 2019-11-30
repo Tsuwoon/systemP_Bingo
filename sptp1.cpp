@@ -518,8 +518,12 @@ int Select_Thema() {
 
 		if (r_arr1[0] != NULL && r_arr2[0] != NULL) { //차있다면
 			for (int j = 0; j < i; j++) {
-				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) //하나라도 중복이면
+				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) { //하나라도 중복이면
+					int ran1 = rand() % (word_count);
+					int ran2 = rand() % (word_count);
+					j--;
 					continue;
+				}
 				else
 					break;
 			}
@@ -532,7 +536,6 @@ int Select_Thema() {
 		for (int j = 0; j < 5; j++) {
 			int ran1 = rand() % (word_count-1);
 			int ran2 = rand() % (word_count-1);
-			//중복처리
 			
 			cout << words[ran1] << " " << words[ran2] << endl;
 			strcpy(word[(i * 5) + j], words[ran1]);
