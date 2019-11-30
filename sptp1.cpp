@@ -513,10 +513,11 @@ int Select_Thema() {
 
 	int r_arr1[25],r_arr2[25]; //중복 제거용 배열
 	for (int i = 0; i < 25; i++) {
+		cout << i << " 들어감?" << endl;
 		int ran1 = rand() % (word_count);
 		int ran2 = rand() % (word_count);
 
-		if (r_arr1[0] != NULL && r_arr2[0] != NULL) { //차있다면
+		if (!r_arr1[0] && !r_arr2[0]) { //차있다면
 			for (int j = 0; j < i; j++) {
 				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) { //하나라도 중복이면
 					int ran1 = rand() % (word_count);
@@ -540,18 +541,6 @@ int Select_Thema() {
 			strcpy(c_word[(i * 5) + j], words[r_arr2[(i * 5) + j]]);
 		}
 	}
-
-	//while (1) {
-	//	numread = readline(fd, word[word_count], WORD_SIZE);
-	//	if (numread == -1) {
-	//		perror("읽는데 에러 발생");
-	//	}
-	//	if (numread == 0)
-	//		break;
-	//	//cout << numread << endl;
-	//	word_count++;
-	//	//cout << word[word_count++] << endl;
-	//}
 
 	//close file
 	int retval;
