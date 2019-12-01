@@ -81,7 +81,12 @@ public:
 		}
 		RBingoCount = 0;
 		LBingoCount = 0;
-
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				cout << nStatus[i][j] << "  ";
+			}cout << endl;
+		}
+		cout << endl;
 	}
 
 	int checkBingo() // 이 함수는 nStatus[5][5]를 이용하여 빙고를 부를 수 있는지 검사한다.
@@ -173,7 +178,34 @@ public:
 		cout << "\n";
 	}
 
-	int callNumber(int number) {
+	//int callNumber(int number) {
+
+	//   /* 이 함수는 int number를 입력으로 받아 들인다.
+	//   그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
+	//   nStatus[5][5]에 기록한다.
+	//   int number가 이상이 없으면 return 1
+	//   이상이 있으면 return 0
+	//   (1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
+
+	//   int i, j;
+
+	//   for (i = 0; i < 5; i++) {
+	//      for (j = 0; j < 5; j++) {
+	//         if (nStatus[i][j] == 0 && bingoNum[i][j] == number) { // 중복 체크
+	//            cout << "오류!! 중복됩니다" << endl;
+	//            return 0;
+	//         }
+	//         if (nStatus[i][j] == number) { // 문제 없음
+	//            nStatus[i][j] = 0;
+	//            return 1;
+	//         }
+	//      }
+	//   }
+	//   // 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
+	//   cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
+	//   return 0;
+	//}
+	int c_callNumber(char aaa[WORD_SIZE]) {
 
 		/* 이 함수는 int number를 입력으로 받아 들인다.
 		그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
@@ -186,11 +218,11 @@ public:
 
 		for (i = 0; i < 5; i++) {
 			for (j = 0; j < 5; j++) {
-				if (nStatus[i][j] == 0 && bingoNum[i][j] == number) { // 중복 체크
+				if (nStatus[i][j] == 0 && strcmp(c_word[i * 5 + j], aaa) == 0) { // 중복 체크
 					cout << "오류!! 중복됩니다" << endl;
 					return 0;
 				}
-				if (nStatus[i][j] == number) { // 문제 없음
+				if (strcmp(c_word[i * 5 + j], aaa) == 0) { // 문제 없음
 					nStatus[i][j] = 0;
 					return 1;
 				}
@@ -200,7 +232,35 @@ public:
 		cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
 		return 0;
 	}
+	int u_callNumber(char number[WORD_SIZE]) {
 
+		/* 이 함수는 int number를 입력으로 받아 들인다.
+		그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
+		nStatus[5][5]에 기록한다.
+		int number가 이상이 없으면 return 1
+		이상이 있으면 return 0
+		(1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
+
+		int i, j;
+
+		for (i = 0; i < 5; i++) {
+			for (j = 0; j < 5; j++) {
+				if (nStatus[i][j] == 0 && strcmp(word[i * 5 + j], number) == 0) { // 중복 체크
+					cout << "오류!! 중복됩니다" << endl;
+					return 0;
+				}
+				if (strcmp(word[5 * i + j], number) == 0) { // 문제 없음
+					nStatus[i][j] = 0;
+					return 1;
+				}
+			}
+		}
+		// 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
+		cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
+		return 0;
+	}
+	int now_sero = -1;
+	int now_garo = -1;
 	int AI() // 컴퓨터의 [5][5]배열을 통해서 가로, 세로, 대각선의
 			 // 0개수를 파악하여 0이 가장 많은 줄에 0을 넣게하는 알고리즘.
 	{
@@ -238,6 +298,8 @@ public:
 					for (j = 1; j < 4; j++) {
 						if (nStatus[i][j] != 0) {
 							result = nStatus[i][j];
+							now_sero = i;
+							now_garo = j;
 							nStatus[i][j] = 0;
 							return result;
 						}
@@ -327,6 +389,8 @@ public:
 				for (j = 0; j < 5; j++) {
 					if (nStatus[Wbigline][j] != 0) {
 						result = nStatus[Wbigline][j];
+						now_sero = Wbigline;
+						now_garo = j;
 						nStatus[Wbigline][j] = 0;
 						return result;
 					}
@@ -338,6 +402,8 @@ public:
 					if (nStatus[i][Hbigline] != 0) {
 						result = nStatus[i][Hbigline];
 						nStatus[i][Hbigline] = 0;
+						now_sero = i;
+						now_garo = Hbigline;
 						return result;
 					}
 				}
@@ -348,6 +414,8 @@ public:
 					if (nStatus[i][i] != 0) {
 						result = nStatus[i][i];
 						nStatus[i][i] = 0;
+						now_sero = i;
+						now_garo = i;
 						return result;
 					}
 				}
@@ -358,6 +426,8 @@ public:
 					if (nStatus[i][j] != 0) {
 						result = nStatus[i][j];
 						nStatus[i][j] = 0;
+						now_sero = i;
+						now_garo = j;
 						return result;
 					}
 				}
@@ -368,6 +438,8 @@ public:
 		{
 			result = nStatus[2][2];
 			nStatus[2][2] = 0; // 첫번째로 nStatus[2][2]에 0이 없으면 0을 넣는다.
+			now_sero = 2;
+			now_garo = 2;
 			return result;
 		}
 
@@ -499,26 +571,67 @@ int Select_Thema() {
 		word_count++;
 	}
 
-	int r_arr1[25], r_arr2[25]; //중복 제거용 배열
+	int r_arr1[25] = { -1 }, r_arr2[25] = { -1 }; //중복 제거용 배열
 	for (int i = 0; i < 25; i++) {
 		int ran1 = rand() % (word_count);
 		int ran2 = rand() % (word_count);
 
-		if (!r_arr1[0] && !r_arr2[0]) { //차있다면
-			for (int j = 0; j < i; j++) {
-				if (r_arr1[j] == ran1 || r_arr2[j] == ran2) { //하나라도 중복이면
-					int ran1 = rand() % (word_count);
-					int ran2 = rand() % (word_count);
-					j--;
-					continue;
+		//if (!r_arr1[0] && !r_arr2[0]) { //차있다면
+		//   for (int j = 0; j < i; j++) {
+		//      if (r_arr1[j] == ran1) { //하나라도 중복이면
+		//         int ran1 = rand() % (word_count);               
+		//         j--;
+		//         continue;
+		//      }
+		//      else
+		//         break;
+		//   }
+		//   for (int j = 0; j < i; j++) {
+		//      if (r_arr2[j] == ran2) { //하나라도 중복이면
+		//         int ran2 = rand() % (word_count);
+		//         j--;
+		//         continue;
+		//      }
+		//      else
+		//         break;
+		//   }
+		//}
+
+
+		if (r_arr1[0] > -1 && r_arr2[0] > -1)
+		{
+			while (1) {
+				ran1 = rand() % (word_count);
+				bool checker = 1;
+
+				for (int j = 0; j < i; j++) {
+					if (r_arr1[j] == ran1) {
+
+						checker = 0;
+						break;
+					}
 				}
-				else
+				if (checker == 1)break;
+
+			}
+			while (1) {
+				bool checker2 = 1;
+				ran2 = rand() % (word_count);
+				for (int j = 0; j < i; j++) {
+					if (r_arr2[j] == ran2)
+
+						checker2 = 0;
 					break;
+				}
+				if (checker2 == 1)break;
 			}
 		}
 		r_arr1[i] = ran1;
 		r_arr2[i] = ran2;
 	}
+
+
+
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
@@ -541,6 +654,7 @@ int Select_Thema() {
 
 
 //실제 게임 진행 함수
+
 void vscomputer() {
 	srand((unsigned)time(NULL));
 
@@ -548,7 +662,8 @@ void vscomputer() {
 	Bingo com;
 
 	int x;
-	int num;
+	string ch;
+	char num[WORD_SIZE];
 	int a;
 	int y;
 
@@ -560,24 +675,26 @@ void vscomputer() {
 		user.printBingoGrid();
 		com.printBingoGrid_com();
 
-		cout << "숫자를 선택하세요 : ";
-		x = scanf("%d", &num); // scanf는 지형 형식자 이외에 모두 입력 거부되어 0또는 1이 들어간다.
 
+
+
+		cout << "빙고판의 문자를 입력하세요 : ";
+		cin >> ch; // scanf는 지형 형식자 이외에 모두 입력 거부되어 0또는 1이 들어간다.
+
+		strcpy(num, ch.c_str());
+		cout << num << endl;
 		cout << "---------------------------------" << endl;
-		if (x == 1) // x가 1일때에는 정수를 입력했으므로 다시 정수를 입력시킨다.
-		{
-			a = num;
-		}
-		if (x == 0) // x가 문자나 0일 때는 초과된 26을 넣는다.
-		{
-			a = 26;
-		}
-		if (user.callNumber(a) == 0) {
+		//if (x == 1) // x가 1일때에는 정수를 입력했으므로 다시 정수를 입력시킨다.
+		//{
+		//   a = num;
+		//}
+
+		if (user.u_callNumber(num) == 0) {
 			continue;
 		}
 
 		//---------------------------------컴퓨터--------------------------------
-		com.callNumber(a);
+		com.c_callNumber(num);
 		if (user.checkBingo() == 1) // 사용자가 먼저 빙고를 부르면 승리!!를 체크
 		{
 			cout << "-------------------------------" << endl;
@@ -596,8 +713,8 @@ void vscomputer() {
 		}
 
 		y = com.AI(); // 컴퓨터 실행;
-		cout << "컴퓨터가 부른 수는? : " << y << endl;
-		user.callNumber(y);
+		cout << "컴퓨터가 부른 문자는? : " << c_word[com.now_sero * 5 + com.now_garo] << endl;
+		user.u_callNumber(c_word[com.now_sero * 5 + com.now_garo]);
 
 		if (com.checkBingo() == 1) // 컴퓨터가 먼저 빙고를 부르면 승리!!를 체크
 		{
