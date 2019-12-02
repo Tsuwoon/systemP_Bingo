@@ -697,8 +697,11 @@ int Select_Thema() {
 	return thema;
 
 }
+int is_alarmed = 1; //5초가 되면 0으로 
+
 void myalarm(int sig) {
 	cout << "Time out, 엔터를 누르시면 컴퓨터의 턴으로 돌아갑니다" << endl;
+	is_alarmed = 0;
 };
 
 //실제 게임 진행 함수
@@ -740,20 +743,20 @@ void vscomputer() {
 		}cout << endl;
 
 		cout << "빙고판의 문자를 입력하세요 : ";
-		int a = 1;
+		
 
 		struct sigaction alarmed;//알람 시그널 핸들러 달기
 		alarmed.sa_handler = myalarm;
 		alarmed.sa_flags = 0;
 		if (sigaction(SIGALRM, &alarmed, NULL) == -1)
 			perror("Failed to install SIGALRM signal handler");
-		a = alarm(5); //5초 후 다음 턴으로
+		alarm(5); //5초 후 다음 턴으로
 
 		cin >> ch; //입력 받기
 
-		while (a!=0) {
+		while (is_alarmed !=0) {
 			cout << "아직 도는중" << endl;
-			if (a == 0) {
+			if (is_alarmed == 0) {
 				cout << "5초 끝남" << endl;
 				//cin 받은걸로 처리하기
 				cin.ignore(100, '\n');
