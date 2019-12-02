@@ -757,7 +757,7 @@ void vscomputer() {
 
 		if (is_alarmed == 0) {
 			cout << "5초 끝남" << endl;
-			cin.ignore(100, '\n');
+			//cin.ignore(100, '\n');
 			cout << "cin.ignore다음" << endl;
 		}
 
