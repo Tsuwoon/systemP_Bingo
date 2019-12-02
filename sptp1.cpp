@@ -709,6 +709,7 @@ void vscomputer() {
 
 
 		fflush(stdin); // 버퍼를 비워준다.
+		cin.clear();
 
 		user.printBingoGrid();
 		com.printBingoGrid_com();
@@ -774,6 +775,7 @@ void vscomputer() {
 		//cout << "while문 탈출" << endl;
 
 		strcpy(num, ch.c_str());
+		cin.clear();
 		cout << "입력 확인용 출력 : " << num << endl;
 		cout << "---------------------------------" << endl;
 
