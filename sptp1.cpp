@@ -742,18 +742,19 @@ void vscomputer() {
 
 		a = alarm(7); //제한시간 후 컴퓨터 턴으로 //제한 시간 바꿀꺼면 여기 바꾸기
 
-		while (1) {
-			if (is_alarmed == 0) { //제한시간 경과
-				//cout << "남은 초 : "<< a << endl;
-				cin.ignore(100, '\n');
-				cout << "while문 나감" << endl;
-				break;
-			}
-			else {
-				//cout << "남은 초 : " << a << endl;
-				cin >> ch; //입력 받기
-				break;
-			}
+		while (!is_alarmed) {
+			cin >> ch; //입력 받기
+			//if (is_alarmed == 0) { //제한시간 경과
+			//	//cout << "남은 초 : "<< a << endl;
+			//	cin.ignore(100, '\n');
+			//	cout << "while문 나감" << endl;
+			//	break;
+			//}
+			//else {
+			//	//cout << "남은 초 : " << a << endl;
+			//	cin >> ch; //입력 받기
+			//	break;
+			//}
 		}
 
 		strcpy(num, ch.c_str());
@@ -784,6 +785,7 @@ void vscomputer() {
 
 		if (user.checkBingo() == 1) // 사용자가 먼저 빙고를 부르면 승리!!를 체크
 		{
+			alarm(0);
 			cout << "-------------------------------" << endl;
 			cout << "빙고!! 승리하셨습니다!" << endl;
 			user.printBingoGrid();
@@ -792,6 +794,7 @@ void vscomputer() {
 		}
 		if (com.checkBingo() == 1)
 		{
+			alarm(0);
 			cout << "-------------------------------" << endl;
 			cout << "빙고!! 패배하셨습니다!" << endl;
 			com.printBingoGrid();
@@ -805,6 +808,7 @@ void vscomputer() {
 
 		if (com.checkBingo() == 1) // 컴퓨터가 먼저 빙고를 부르면 승리!!를 체크
 		{
+			alarm(0);
 			cout << "-------------------------------" << endl;
 			cout << "빙고!! 승리하셨습니다!" << endl;
 			com.printBingoGrid();
@@ -813,6 +817,7 @@ void vscomputer() {
 		}
 		if (user.checkBingo() == 1)
 		{
+			alarm(0);
 			cout << "-------------------------------" << endl;
 			cout << "빙고!! 패배하셨습니다!" << endl;
 			user.printBingoGrid();
