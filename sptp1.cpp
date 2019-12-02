@@ -742,8 +742,12 @@ void vscomputer() {
 
 		a = alarm(7); //제한시간 후 컴퓨터 턴으로 //제한 시간 바꿀꺼면 여기 바꾸기
 
-		while (!is_alarmed) {
-			cin >> ch; //입력 받기
+		while (1) {
+			if (is_alarmed != 0) {
+				cin >> ch; //입력 받기
+				break;
+			}
+			
 			//if (is_alarmed == 0) { //제한시간 경과
 			//	//cout << "남은 초 : "<< a << endl;
 			//	cin.ignore(100, '\n');
