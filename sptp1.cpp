@@ -687,7 +687,7 @@ int is_alarmed = 1; //5초가 되면 0으로
 
 void myalarm(int sig) {
 	cout << endl;
-	cout << "Time out, 엔터를 누르시면 컴퓨터의 턴으로 돌아갑니다" << endl;
+	cout << "Time out!!  컴퓨터의 턴" << endl;
 	is_alarmed = 0;
 };
 
@@ -706,7 +706,6 @@ void vscomputer() {
 	int y;
 
 	while (1) {
-
 
 		fflush(stdin); // 버퍼를 비워준다.
 		cin.clear();
@@ -741,13 +740,12 @@ void vscomputer() {
 		int a = 100;
 		is_alarmed = 1; //초기화
 
-		a = alarm(5); //제한시간 후 컴퓨터 턴으로
+		a = alarm(7); //제한시간 후 컴퓨터 턴으로
 
 		while (1) {
 			if (is_alarmed == 0) { //제한시간 경과
-				cout << "남은 초 : "<< a << endl;
+				//cout << "남은 초 : "<< a << endl;
 				cin.ignore(100, '\n');
-				//cin.eof();
 				cout << "while문 나감" << endl;
 				break;
 			}
@@ -757,24 +755,14 @@ void vscomputer() {
 				break;
 			}
 		}
-		
+
+		strcpy(num, ch.c_str());
+
 		if (is_alarmed == 0) {
 			strcpy(num, "time over");
 			cout << "5초 끝남" << endl;
 		}
 
-		//while (1) {
-		//	cout << "아직 도는중" << endl;
-		//	if (is_alarmed == 0) {
-		//		cout << "5초 끝남" << endl;
-		//		//cin 받은걸로 처리하기
-		//		cin.ignore(100, '\n');
-		//		break;
-		//	}
-		//}
-		//cout << "while문 탈출" << endl;
-
-		strcpy(num, ch.c_str());
 		cin.clear();
 		cout << "입력 확인용 출력 : " << num << endl;
 		cout << "---------------------------------" << endl;
