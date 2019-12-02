@@ -740,7 +740,7 @@ void vscomputer() {
 		int a = 100;
 		is_alarmed = 1; //초기화
 
-		a = alarm(7); //제한시간 후 컴퓨터 턴으로
+		a = alarm(7); //제한시간 후 컴퓨터 턴으로 //제한 시간 바꿀꺼면 여기 바꾸기
 
 		while (1) {
 			if (is_alarmed == 0) { //제한시간 경과
@@ -750,7 +750,7 @@ void vscomputer() {
 				break;
 			}
 			else {
-				cout << "남은 초 : " << a << endl;
+				//cout << "남은 초 : " << a << endl;
 				cin >> ch; //입력 받기
 				break;
 			}
@@ -759,12 +759,11 @@ void vscomputer() {
 		strcpy(num, ch.c_str());
 
 		if (is_alarmed == 0) {
-			strcpy(num, "time over");
-			cout << "5초 끝남" << endl;
+			strcpy(num, "time out");
 		}
 
 		cin.clear();
-		cout << "입력 확인용 출력 : " << num << endl;
+		//cout << "입력 확인용 출력 : " << num << endl;
 		cout << "---------------------------------" << endl;
 
 		if (is_alarmed != 0) { 
