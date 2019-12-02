@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include<string.h>//stdio랑 string은 strlen쓰기위함.
 #include<sys/wait.h>
+#include <stdio_ext.h> //버퍼비우기
 #define WORD_MAX 1024
 #define WORD_SIZE 31 //제한글자개수*3+1 (한글자당 3바이트에 마지막 '\0')
 using namespace std;
@@ -117,7 +118,7 @@ public:
 			}
 		}
 
-		for (j = 5, i = 0; j >= 0, i < 5; j--, i++) {
+		for (j = 4, i = 0; j >= 0, i < 5; j--, i++) {
 			if (nStatus[j][j] == 0) // 왼쪽 대각선 체크
 			{
 				LCoount++;
@@ -204,33 +205,6 @@ public:
 		cout << "\n";
 	}
 
-	//int callNumber(int number) {
-
-	//   /* 이 함수는 int number를 입력으로 받아 들인다.
-	//   그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
-	//   nStatus[5][5]에 기록한다.
-	//   int number가 이상이 없으면 return 1
-	//   이상이 있으면 return 0
-	//   (1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
-
-	//   int i, j;
-
-	//   for (i = 0; i < 5; i++) {
-	//      for (j = 0; j < 5; j++) {
-	//         if (nStatus[i][j] == 0 && bingoNum[i][j] == number) { // 중복 체크
-	//            cout << "오류!! 중복됩니다" << endl;
-	//            return 0;
-	//         }
-	//         if (nStatus[i][j] == number) { // 문제 없음
-	//            nStatus[i][j] = 0;
-	//            return 1;
-	//         }
-	//      }
-	//   }
-	//   // 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
-	//   cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;
-	//   return 0;
-	//}
 	int c_callNumber(char aaa[WORD_SIZE]) {
 
 		int i, j;
@@ -247,8 +221,6 @@ public:
 				}
 			}
 		}
-		// 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
-		/*cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;*/
 		return 0;
 	}
 	int u_callNumber(char number[WORD_SIZE]) {
@@ -269,10 +241,9 @@ public:
 		}
 
 		cout << "사용자의 빙고판에 없는 단어/숫자입니다!" << endl;
-		// 위 if에 안걸리는 나머지 경우는 숫자가 아닌 경우 뿐
-		/*cout << "오류!! 1~25 중에 숫자를 넣으세요" << endl;*/
 		return 0;
 	}
+
 	int now_sero = -1;
 	int now_garo = -1;
 	int AI() // 컴퓨터의 [5][5]배열을 통해서 가로, 세로, 대각선의
@@ -589,28 +560,6 @@ int Select_Thema() {
 		int ran1 = rand() % (word_count);
 		int ran2 = rand() % (word_count);
 
-		//if (!r_arr1[0] && !r_arr2[0]) { //차있다면
-		//   for (int j = 0; j < i; j++) {
-		//      if (r_arr1[j] == ran1) { //하나라도 중복이면
-		//         int ran1 = rand() % (word_count);               
-		//         j--;
-		//         continue;
-		//      }
-		//      else
-		//         break;
-		//   }
-		//   for (int j = 0; j < i; j++) {
-		//      if (r_arr2[j] == ran2) { //하나라도 중복이면
-		//         int ran2 = rand() % (word_count);
-		//         j--;
-		//         continue;
-		//      }
-		//      else
-		//         break;
-		//   }
-		//}
-
-
 		if (r_arr1[0] > -1 && r_arr2[0] > -1)
 		{
 			while (1) {
@@ -643,26 +592,14 @@ int Select_Thema() {
 		r_arr1[i] = ran1;
 		r_arr2[i] = ran2;
 	}
-	//for (int i = 0; i < 25; i++) {
-	//   cout << r_arr1[i] << " ";
-	//}cout << endl;
-	//for (int i = 0; i < 25; i++) {
-	//   cout << r_arr2[i] << " ";
-	//}cout << endl;
-
-
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-
-			/*cout << words[ran1] << " " << words[ran2] << endl;*/
 			strcpy(word[(i * 5) + j], words[r_arr1[(i * 5) + j]]);
 			strcpy(c_word[(i * 5) + j], words[r_arr2[(i * 5) + j]]);
 		}
 	}
-	/*for (int i = 0; i < 25; i++) {
-	cout << strlen(word[i]) << endl;
-	}*/
+
 	//close file
 	int retval;
 	while (retval = close(fd), retval == -1 && errno == EINTR);
@@ -670,20 +607,11 @@ int Select_Thema() {
 		perror("close에러 발생");
 	fd = -1;//파일 닫았으니까
 
-			/*for (int i = 0; i < 25; i++) {
-			cout << word[i] << " , ";
-			if (i % 5 == 4)cout << endl;
-			}
-			cout << endl;
-			for (int i = 0; i < 25; i++) {
-			cout << c_word[i] << " , ";
-			if (i % 5 == 4)cout << endl;
-			}
-			cout << endl;*/
 	return thema;
 
 }
-int is_alarmed = 1; //5초가 되면 0으로 
+
+int is_alarmed = 1; //제한시간이 다 되면 0으로 
 
 void myalarm(int sig) {
 	cout << endl;
@@ -707,7 +635,8 @@ void vscomputer() {
 
 	while (1) {
 
-		fflush(stdin); // 버퍼를 비워준다.
+		__fpurge(stdin);//버퍼 비우기
+		//fflush(stdin); // 버퍼를 비워준다.//리눅스에서는 안됩니당...
 		cin.clear();
 
 		user.printBingoGrid();
@@ -747,18 +676,6 @@ void vscomputer() {
 				cin >> ch; //입력 받기
 				break;
 			}
-			
-			//if (is_alarmed == 0) { //제한시간 경과
-			//	//cout << "남은 초 : "<< a << endl;
-			//	cin.ignore(100, '\n');
-			//	cout << "while문 나감" << endl;
-			//	break;
-			//}
-			//else {
-			//	//cout << "남은 초 : " << a << endl;
-			//	cin >> ch; //입력 받기
-			//	break;
-			//}
 		}
 
 		strcpy(num, ch.c_str());
@@ -771,7 +688,7 @@ void vscomputer() {
 		//cout << "입력 확인용 출력 : " << num << endl;
 		cout << "---------------------------------" << endl;
 
-		if (is_alarmed != 0) { 
+		if (is_alarmed != 0) { // time out X인 경우 
 			if (user.u_callNumber(num) == 0) {
 				continue;
 			}
@@ -780,16 +697,11 @@ void vscomputer() {
 
 		is_alarmed == 1;//다 썼으니까 초기화
 
-		//if (user.u_callNumber(num) == 0) {
-		//	continue;
-		//}
-
-		////---------------------------------컴퓨터--------------------------------
-		//com.c_callNumber(num);
-
+		
+	
 		if (user.checkBingo() == 1) // 사용자가 먼저 빙고를 부르면 승리!!를 체크
 		{
-			alarm(0);
+			alarm(0); //alarm 제거해주기
 			cout << "-------------------------------" << endl;
 			cout << "빙고!! 승리하셨습니다!" << endl;
 			user.printBingoGrid();
@@ -805,6 +717,8 @@ void vscomputer() {
 			cout << "-------------------------------" << endl;
 			break;
 		}
+
+		////---------------------------------컴퓨터--------------------------------
 
 		y = com.AI(); // 컴퓨터 실행;
 		cout << "컴퓨터가 부른 문자는? : " << c_word[com.now_sero * 5 + com.now_garo] << endl;
@@ -828,7 +742,6 @@ void vscomputer() {
 			cout << "-------------------------------" << endl;
 			break;
 		}
-
 
 	}
 }
