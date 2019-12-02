@@ -700,6 +700,7 @@ int Select_Thema() {
 int is_alarmed = 1; //5초가 되면 0으로 
 
 void myalarm(int sig) {
+	cout << endl;
 	cout << "Time out, 엔터를 누르시면 컴퓨터의 턴으로 돌아갑니다" << endl;
 	is_alarmed = 0;
 };
@@ -754,17 +755,23 @@ void vscomputer() {
 
 		cin >> ch; //입력 받기
 
-		while (1) {
-			cout << "아직 도는중" << endl;
-			if (is_alarmed == 0) {
-				cout << "5초 끝남" << endl;
-				//cin 받은걸로 처리하기
-				cin.ignore(100, '\n');
-				break;
-			}
-			
+		if (is_alarmed == 0) {
+			cout << "5초 끝남" << endl;
+			cin.ignore(100, '\n');
+			cout << "cin.ignore다음" << endl;
 		}
-		cout << "while문 탈출" << endl;
+
+		//while (1) {
+		//	cout << "아직 도는중" << endl;
+		//	if (is_alarmed == 0) {
+		//		cout << "5초 끝남" << endl;
+		//		//cin 받은걸로 처리하기
+		//		cin.ignore(100, '\n');
+		//		break;
+		//	}
+		//	
+		//}
+		//cout << "while문 탈출" << endl;
 
 		strcpy(num, ch.c_str());
 		cout << num << endl;
