@@ -233,13 +233,6 @@ public:
 	//}
 	int c_callNumber(char aaa[WORD_SIZE]) {
 
-		/* 이 함수는 int number를 입력으로 받아 들인다.
-		그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
-		nStatus[5][5]에 기록한다.
-		int number가 이상이 없으면 return 1
-		이상이 있으면 return 0
-		(1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
-
 		int i, j;
 
 		for (i = 0; i < 5; i++) {
@@ -259,13 +252,6 @@ public:
 		return 0;
 	}
 	int u_callNumber(char number[WORD_SIZE]) {
-
-		/* 이 함수는 int number를 입력으로 받아 들인다.
-		그리고, bingoNum[5][5]의 숫자가 호출됐는지 검사하고
-		nStatus[5][5]에 기록한다.
-		int number가 이상이 없으면 return 1
-		이상이 있으면 return 0
-		(1~25 사이의 숫자가 아닌 경우, 문자가 입력된 경우) */
 
 		int i, j;
 
@@ -756,9 +742,12 @@ void vscomputer() {
 		cin >> ch; //입력 받기
 
 		if (is_alarmed == 0) {
+			strcpy(num, "time over");
+			string yn;
 			cout << "5초 끝남" << endl;
-			//cin.ignore(100, '\n');
-			cout << "cin.ignore다음" << endl;
+			cout << "계속하려면 아무 문자를 친후 엔터를 누르세요" << endl;
+			cin >> yn;
+			cout << "yn다음" << endl;
 		}
 
 		//while (1) {
@@ -774,19 +763,25 @@ void vscomputer() {
 		//cout << "while문 탈출" << endl;
 
 		strcpy(num, ch.c_str());
-		cout << num << endl;
+		cout << "입력 확인용 출력 : " << num << endl;
 		cout << "---------------------------------" << endl;
-		//if (x == 1) // x가 1일때에는 정수를 입력했으므로 다시 정수를 입력시킨다.
-		//{
-		//   a = num;
-		//}
 
-		if (user.u_callNumber(num) == 0) {
-			continue;
+		if (is_alarmed != 0) { 
+			if (user.u_callNumber(num) == 0) {
+				continue;
+			}
+			com.c_callNumber(num);
 		}
 
-		//---------------------------------컴퓨터--------------------------------
-		com.c_callNumber(num);
+		is_alarmed == 1;//다 썼으니까 초기화
+
+		//if (user.u_callNumber(num) == 0) {
+		//	continue;
+		//}
+
+		////---------------------------------컴퓨터--------------------------------
+		//com.c_callNumber(num);
+
 		if (user.checkBingo() == 1) // 사용자가 먼저 빙고를 부르면 승리!!를 체크
 		{
 			cout << "-------------------------------" << endl;
