@@ -737,15 +737,18 @@ void vscomputer() {
 		alarmed.sa_flags = 0;
 		if (sigaction(SIGALRM, &alarmed, NULL) == -1)
 			perror("Failed to install SIGALRM signal handler");
-		alarm(5); //5초 후 다음 턴으로
+		int a = 100;
+		a = alarm(5); //5초 후 다음 턴으로
 
 		while (1) {
 			if (is_alarmed == 0) {
+				cout << "남은 초 : "<< a << endl;
 				cin.eof();
 				cout << "while문 나감" << endl;
 				break;
 			}
 			else {
+				cout << "남은 초 : " << a << endl;
 				cin >> ch; //입력 받기
 				break;
 			}
