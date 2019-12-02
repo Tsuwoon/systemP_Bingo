@@ -754,7 +754,7 @@ void vscomputer() {
 
 		cin >> ch; //입력 받기
 
-		while (is_alarmed !=0) {
+		while (1) {
 			cout << "아직 도는중" << endl;
 			if (is_alarmed == 0) {
 				cout << "5초 끝남" << endl;
