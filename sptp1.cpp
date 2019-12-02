@@ -738,12 +738,15 @@ void vscomputer() {
 		if (sigaction(SIGALRM, &alarmed, NULL) == -1)
 			perror("Failed to install SIGALRM signal handler");
 		int a = 100;
-		a = alarm(5); //5초 후 다음 턴으로
+		is_alarmed = 1; //초기화
+
+		a = alarm(5); //제한시간 후 컴퓨터 턴으로
 
 		while (1) {
-			if (is_alarmed == 0) {
+			if (is_alarmed == 0) { //제한시간 경과
 				cout << "남은 초 : "<< a << endl;
-				cin.eof();
+				cin.ignore(100, '\n');
+				//cin.eof();
 				cout << "while문 나감" << endl;
 				break;
 			}
@@ -752,16 +755,11 @@ void vscomputer() {
 				cin >> ch; //입력 받기
 				break;
 			}
-			
 		}
 		
 		if (is_alarmed == 0) {
 			strcpy(num, "time over");
-			//string yn;
 			cout << "5초 끝남" << endl;
-			/*cout << "계속하려면 아무 문자를 친후 엔터를 누르세요" << endl;
-			cin >> yn;
-			cout << "yn다음" << endl;*/
 		}
 
 		//while (1) {
@@ -772,7 +770,6 @@ void vscomputer() {
 		//		cin.ignore(100, '\n');
 		//		break;
 		//	}
-		//	
 		//}
 		//cout << "while문 탈출" << endl;
 
