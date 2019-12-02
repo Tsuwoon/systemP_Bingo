@@ -740,11 +740,13 @@ void vscomputer() {
 		alarm(5); //5초 후 다음 턴으로
 
 		while (1) {
-			cout << "도는중" << endl;
-			cin >> ch; //입력 받기
 			if (is_alarmed == 0) {
 				cin.eof();
 				cout << "while문 나감" << endl;
+				break;
+			}
+			else {
+				cin >> ch; //입력 받기
 				break;
 			}
 			
