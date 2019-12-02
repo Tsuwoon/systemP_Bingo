@@ -739,14 +739,21 @@ void vscomputer() {
 			perror("Failed to install SIGALRM signal handler");
 		alarm(5); //5초 후 다음 턴으로
 
-		cin >> ch; //입력 받기
-
+		while (1) {
+			cout << "도는중" << endl;
+			cin >> ch; //입력 받기
+			if (is_alarmed == 0) {
+				cin.eof();
+				cout << "while문 나감" << endl;
+				break;
+			}
+			
+		}
+		
 		if (is_alarmed == 0) {
 			strcpy(num, "time over");
-			string yn;
+			//string yn;
 			cout << "5초 끝남" << endl;
-			cin.ignore();
-			cout << "cin다음" << endl;
 			/*cout << "계속하려면 아무 문자를 친후 엔터를 누르세요" << endl;
 			cin >> yn;
 			cout << "yn다음" << endl;*/
