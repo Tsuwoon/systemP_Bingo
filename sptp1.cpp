@@ -745,9 +745,11 @@ void vscomputer() {
 			strcpy(num, "time over");
 			string yn;
 			cout << "5초 끝남" << endl;
-			cout << "계속하려면 아무 문자를 친후 엔터를 누르세요" << endl;
+			cin.ignore();
+			cout << "cin다음" << endl;
+			/*cout << "계속하려면 아무 문자를 친후 엔터를 누르세요" << endl;
 			cin >> yn;
-			cout << "yn다음" << endl;
+			cout << "yn다음" << endl;*/
 		}
 
 		//while (1) {
