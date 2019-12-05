@@ -776,8 +776,9 @@ void Add_word(int thema) {
 
 pid_t childpid = 0;
 int status;
+int pid;//자식 프로세스 아이디
 
-//메뉴 선택
+		//메뉴 선택
 void Game_Start() {
 	cout << "메뉴를 선택하세요. " << endl << endl;
 	cout << "1. 게임 시작" << endl;
@@ -805,12 +806,24 @@ void Game_Start() {
 			exit(0);
 		}
 		if (childpid == 0) { //자식 프로세스
+			pid = getpid();//pid 에 현재 프로세스 아이디 저장
 			cout << "자식 프로세스 시작" << endl;
+
 			num1();
+
+			while (1) {//exit시키기
+				if (pid == getpid()) {
+					exit(0);
+				}
+				else {
+					perror("Failed to exit");
+				}
+			}
+
 		}
 		else { //부모 프로세스
 			cout << "부모 프로세스 시작" << endl;
-			waitpid(childpid, &status, 0);
+			waitpid(childpid, &status, 0);//자식이 끝날때까지 기다림
 			cout << "부모 프로세스 종료" << endl;
 		}
 		break;
