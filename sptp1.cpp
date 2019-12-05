@@ -674,7 +674,7 @@ void vscomputer() {
 			alarm(0);
 			cout << "-------------------------------" << endl;
 			cout << "빙고!! 패배하셨습니다!" << endl;
-			com.printBingoGrid();
+			com.printBingoGrid_com();
 			cout << "-------------------------------" << endl;
 			break;
 		}
@@ -690,7 +690,7 @@ void vscomputer() {
 			alarm(0);
 			cout << "-------------------------------" << endl;
 			cout << "컴퓨터 빙고!! 패배하셨습니다!" << endl;
-			com.printBingoGrid();
+			com.printBingoGrid_com();
 			cout << "-------------------------------" << endl;
 			break;
 		}
