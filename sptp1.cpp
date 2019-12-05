@@ -597,7 +597,7 @@ void vscomputer() {
 	while (1) {
 
 		__fpurge(stdin);//버퍼 비우기
-		//fflush(stdin); // 버퍼를 비워준다.//리눅스에서는 안됩니당...
+						//fflush(stdin); // 버퍼를 비워준다.//리눅스에서는 안됩니당...
 		cin.clear();
 
 		user.printBingoGrid();
@@ -618,9 +618,9 @@ void vscomputer() {
 				cout << com.nStatus[i][j] << " ";
 			}cout << endl;
 		}cout << endl;
-		//
+
 		cout << "빙고판의 문자를 입력하세요 : ";
-		
+
 
 		struct sigaction alarmed;//알람 시그널 핸들러 달기
 		alarmed.sa_handler = myalarm;
@@ -658,8 +658,8 @@ void vscomputer() {
 
 		is_alarmed == 1;//다 썼으니까 초기화
 
-		
-	
+
+
 		if (user.checkBingo() == 1) // 사용자가 먼저 빙고를 부르면 승리!!를 체크
 		{
 			alarm(0); //alarm 제거해주기
@@ -689,7 +689,7 @@ void vscomputer() {
 		{
 			alarm(0);
 			cout << "-------------------------------" << endl;
-			cout << "빙고!! 승리하셨습니다!" << endl;
+			cout << "컴퓨터 빙고!! 패배하셨습니다!" << endl;
 			com.printBingoGrid();
 			cout << "-------------------------------" << endl;
 			break;
@@ -698,7 +698,7 @@ void vscomputer() {
 		{
 			alarm(0);
 			cout << "-------------------------------" << endl;
-			cout << "빙고!! 패배하셨습니다!" << endl;
+			cout << "유저 빙고!! 승리하셨습니다!" << endl;
 			user.printBingoGrid();
 			cout << "-------------------------------" << endl;
 			break;
@@ -806,8 +806,6 @@ void Game_Start() {
 		}
 		if (childpid == 0) { //자식 프로세스
 			cout << "자식 프로세스 시작" << endl;
-			cout << getpid() << endl;
-			cout << getppid() << endl;
 			num1();
 		}
 		else { //부모 프로세스
