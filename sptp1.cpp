@@ -18,7 +18,8 @@ using namespace std;
 // 건들지마시오
 char word[WORD_MAX][WORD_SIZE]; //사용자 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 char c_word[WORD_MAX][WORD_SIZE]; //컴퓨터 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
-char words[1024][31];                   // 건들지마시오
+char words[WORD_MAX][WORD_SIZE];                   
+// 건들지마시오
 
 
 class Bingo
@@ -26,9 +27,7 @@ class Bingo
 private:
 
 public:
-	int bingoNum[5][5]; // 임의로 생성된 숫자를 저장하는 배열
 	int nStatus[5][5]; // bingoNum[5][5]의 숫자가 불렸는지를 체크하는 배열
-	int num[25]; // 1배열에 25개 난수를 저장한다.
 	int WBingoCount[5]; // 가로줄 빙고 확인
 	int HBingoCount[5]; // 세로줄 빙고 확인
 	int RBingoCount; // 오른쪽 대각선 확인
@@ -37,18 +36,6 @@ public:
 
 		int i, j;
 		int x;
-
-		//for (i = 0; i < 25; i++) { // 1차 배열에 중복없는 난수를 저장한다.
-
-		//	x = R.getRNumber();
-		//	num[i] = x;
-		//	for (j = 0; j < i; j++) {
-		//		if (num[j] == x) {
-		//			i--;
-		//			break;
-		//		}
-		//	}
-		//}
 
 		for (i = 0; i < 5; i++) { // 1차배열을 2차 배열로 만들기
 			for (j = 0; j < 5; j++) {
