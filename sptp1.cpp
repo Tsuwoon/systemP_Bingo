@@ -71,8 +71,7 @@ public:
 		}
 		for (i = 0; i < 5; i++) { // 1차배열을 2차 배열로 만들기
 			for (j = 0; j < 5; j++) {
-				bingoNum[i][j] = num[(i * 5) + j];
-				nStatus[i][j] = bingoNum[i][j];
+				nStatus[i][j] = 1;
 			}
 		}
 		// -------------------------------초기화
@@ -651,7 +650,7 @@ void vscomputer() {
 				cout << com.nStatus[i][j] << " ";
 			}cout << endl;
 		}cout << endl;
-
+		//
 		cout << "빙고판의 문자를 입력하세요 : ";
 		
 
@@ -743,10 +742,7 @@ void vscomputer() {
 //1번 메뉴(게임시작) 미완성
 void num1() {
 	int thema = Select_Thema();
-
-	//Make_Map();//<<현재 Bingo에 내장되어있음
 	vscomputer();
-
 }
 
 //단어 추가(write)
