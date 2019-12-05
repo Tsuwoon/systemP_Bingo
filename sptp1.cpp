@@ -38,17 +38,18 @@ public:
 		int i, j;
 		int x;
 
-		for (i = 0; i < 25; i++) { // 1차 배열에 중복없는 난수를 저장한다.
+		//for (i = 0; i < 25; i++) { // 1차 배열에 중복없는 난수를 저장한다.
 
-			x = R.getRNumber();
-			num[i] = x;
-			for (j = 0; j < i; j++) {
-				if (num[j] == x) {
-					i--;
-					break;
-				}
-			}
-		}
+		//	x = R.getRNumber();
+		//	num[i] = x;
+		//	for (j = 0; j < i; j++) {
+		//		if (num[j] == x) {
+		//			i--;
+		//			break;
+		//		}
+		//	}
+		//}
+
 		for (i = 0; i < 5; i++) { // 1차배열을 2차 배열로 만들기
 			for (j = 0; j < 5; j++) {
 				nStatus[i][j] = 1;
