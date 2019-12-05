@@ -850,10 +850,11 @@ void Game_Start() {
 			cout << "부모 프로세스 종료" << endl;
 		}
 		break;
-	case 2: //보기 추가
+	case 2: { //보기 추가
 		int thema = Select_Thema();
 		Add_word(thema);
 		break;
+	}
 	case 3:
 		exit(0);
 		break;
