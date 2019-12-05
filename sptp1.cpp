@@ -502,7 +502,7 @@ int Select_Thema() {
 	srand((unsigned)time(NULL));
 	//word초기화
 	for (int i = 0; i < WORD_MAX; i++) {
-		word[i][0] = '\0';
+		words[i][0] = '\0';
 	}
 	//테마 번호 입력
 	int thema = 0;
@@ -812,12 +812,6 @@ void Add_word(int thema) {
 
 pid_t childpid = 0;
 int status;
-//2번 메뉴(보기추가)
-void num2() {
-	int thema = Select_Thema();
-	Add_word(thema);
-	//sssss
-}
 
 //메뉴 선택
 void Game_Start() {
@@ -855,16 +849,12 @@ void Game_Start() {
 			waitpid(childpid, &status, 0);
 			cout << "부모 프로세스 종료" << endl;
 		}
-
-
-		//num1();
 		break;
-	case 2:
-		//cout << 2 << endl; fork
-		num2();
+	case 2: //보기 추가
+		int thema = Select_Thema();
+		Add_word(thema);
 		break;
 	case 3:
-		//cout << 3 << endl; fork
 		exit(0);
 		break;
 	}
