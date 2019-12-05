@@ -21,25 +21,6 @@ char c_word[WORD_MAX][WORD_SIZE]; //컴퓨터 단어 저장 WORD_MAX: 단어 개
 char words[1024][31];                   // 건들지마시오
 
 
-class Rnd
-{
-private:
-	int start;
-	int end;
-
-public:
-	Rnd() // 생성될때 1~25까지 범위 초기화
-	{
-		start = 1;
-		end = 25;
-	}
-	int getRNumber() // 난수 생성
-	{
-		int rn = (int)((rand() % (end - start + 1)) + start);
-		return rn;
-	}
-};
-
 class Bingo
 {
 private:
@@ -54,7 +35,6 @@ public:
 	int LBingoCount; // 왼쪽 대각선 확인
 	Bingo() {// 이 생성자에서는 bingoNum[5][5] 및 그 이외의 변수를 초기화한다.
 
-		Rnd R;
 		int i, j;
 		int x;
 
