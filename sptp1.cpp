@@ -806,6 +806,8 @@ void Game_Start() {
 		}
 		if (childpid == 0) { //자식 프로세스
 			cout << "자식 프로세스 시작" << endl;
+			cout << getpid() << endl;
+			cout << getppid() << endl;
 			num1();
 		}
 		else { //부모 프로세스
