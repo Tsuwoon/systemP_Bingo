@@ -18,7 +18,7 @@ using namespace std;
 // 건들지마시오
 char word[WORD_MAX][WORD_SIZE]; //사용자 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
 char c_word[WORD_MAX][WORD_SIZE]; //컴퓨터 단어 저장 WORD_MAX: 단어 개수 제한 WORD_SIZE: 단어 바이트 제한
-char words[WORD_MAX][WORD_SIZE];                   
+char words[WORD_MAX][WORD_SIZE];
 // 건들지마시오
 
 
@@ -600,24 +600,26 @@ void vscomputer() {
 						//fflush(stdin); // 버퍼를 비워준다.//리눅스에서는 안됩니당...
 		cin.clear();
 
+		printf("사용자 빙고판\n");
 		user.printBingoGrid();
+		printf("컴퓨터 빙고판\n");
 		com.printBingoGrid_com();
 
 		//nStatus를 출력하고 확인해서 빙고확인용 배열과 화면에 뜨는 출력이 같은지/빙고상황인지 확인.
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				cout.width(2);
-				cout.fill(' ');
-				cout << user.nStatus[i][j] << " ";
-			}cout << endl;
-		}cout << endl;
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				cout.width(2);
-				cout.fill(' ');
-				cout << com.nStatus[i][j] << " ";
-			}cout << endl;
-		}cout << endl;
+		//for (int i = 0; i < 5; i++) {
+		//   for (int j = 0; j < 5; j++) {
+		//      cout.width(2);
+		//      cout.fill(' ');
+		//      cout << user.nStatus[i][j] << " ";
+		//   }cout << endl;
+		//}cout << endl;
+		//for (int i = 0; i < 5; i++) {
+		//   for (int j = 0; j < 5; j++) {
+		//      cout.width(2);
+		//      cout.fill(' ');
+		//      cout << com.nStatus[i][j] << " ";
+		//   }cout << endl;
+		//}cout << endl;
 
 		cout << "빙고판의 문자를 입력하세요 : ";
 
@@ -807,7 +809,7 @@ void Game_Start() {
 		}
 		if (childpid == 0) { //자식 프로세스
 			pid = getpid();//pid 에 현재 프로세스 아이디 저장
-			cout << "자식 프로세스 시작" << endl;
+						   //cout << "자식 프로세스 시작" << endl;
 
 			num1();
 
@@ -822,9 +824,9 @@ void Game_Start() {
 
 		}
 		else { //부모 프로세스
-			cout << "부모 프로세스 시작" << endl;
+			   //cout << "부모 프로세스 시작" << endl;
 			waitpid(childpid, &status, 0);//자식이 끝날때까지 기다림
-			cout << "부모 프로세스 종료" << endl;
+										  //cout << "부모 프로세스 종료" << endl;
 		}
 		break;
 	case 2: { //보기 추가
